@@ -1,14 +1,15 @@
 import { FC, InputHTMLAttributes } from 'react'
 
 interface PropsInput extends InputHTMLAttributes<HTMLInputElement> {
+    parentSet?: string
     label?: string;
     inputSet?: string;
     labelSet?: string;
 }
 
-const CustomInput: FC<PropsInput> = ({label, inputSet, labelSet, ...props}) => {
+export const CustomInput: FC<PropsInput> = ({parentSet, label, inputSet, labelSet, ...props}) => {
     return (
-        <div className="mb-3">
+        <div className={`mb-3 ${parentSet}`}>
             <label className={`${labelSet}`}>{label}</label>
             <input
                 className={`input input-bordered w-full bg-white ${inputSet}`}
@@ -18,4 +19,3 @@ const CustomInput: FC<PropsInput> = ({label, inputSet, labelSet, ...props}) => {
     )
 }
 
-export default CustomInput
