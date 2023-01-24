@@ -1,54 +1,56 @@
+import { CardProfil } from "components/Card";
 import Layout from "components/Layout";
 
 const Profil = () => {
   return (
     <Layout>
-      <div className="">
-        <div className="flex pt-10 px-10 pb-10 py-10 ">
-          <div className="flex flex-col w-2/5 bg-[#E5E5E5]">
-            <div className="flex justify-center py-20 px-10 ">
-              <div className="flex flex-col justify-center w-[400px]">
-                <span className="font-bold text-2xl ">Profile</span>
-                <div className="w-full mx-auto rounded-2xl h-[500px] ">
-                  <div className="flex h-1/2">
-                    <div className="w-[150px] h-[150px] mx-auto mt-16 rounded-full bg-white border-none">
-                      <img
-                        src={
-                          "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
-                        }
-                        className="rounded-full"
-                      />
-                    </div>
-                  </div>
-                  <div className="h-1/2">
-                    <div className="mx-auto my-5 flex justify-center">
-                      <button
-                        className="shadow bg-[#0D99FF] hover:bg-[#0d86ff] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                        type="submit"
-                      >
-                        Update Profile
-                      </button>
-                    </div>
-                    <div className="mx-auto my-5 flex justify-center">
-                      <button
-                        className="shadow bg-[#0D99FF] hover:bg-[#0d86ff] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                        type="submit"
-                      >
-                        Delete Profile
-                      </button>
+      <div className="px-20 pt-20 ">
+        <div className="box-border w-full max-h-fit py-10 bg-[#E5E5E5] rounded-lg">
+          <div className="grid grid-cols-2 ">
+            <div className="pt-5">
+              <span className="font-bold text-2xl px-20 ">Profile</span>
+              <div className="flex flex-col px-20 pt-5">
+                <div className="flex w-full ">
+                  <div className="flex justify-center">
+                    <div className="flex flex-col justify-center w-[400px]">
+                      <div className="w-full mx-auto rounded-2xl h-[500px] ">
+                        <div className="w-[150px] h-[150px] mx-auto mt-3 rounded-full bg-white border-none">
+                          <img
+                            src={
+                              "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
+                            }
+                            className="rounded-full"
+                          />
+                        </div>
+
+                        <div className="mx-auto my-5 flex justify-center">
+                          <button
+                            className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                            type="submit"
+                          >
+                            Update Profile
+                          </button>
+                        </div>
+                        <div className="mx-auto my-5 flex justify-center">
+                          <button
+                            className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                            type="submit"
+                          >
+                            Delete Profile
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-          <div className="flex flex-col w-3/5 bg-[#E5E5E5]">
-            <div className="flex pt-20 pb-4 px-10 justify-center items-center">
+            <div>
               <form className="w-full mx-auto rounded-2xl">
-                <div className="flex flex-col py-2">
+                <div className="flex flex-col pt-20">
                   <label className="font-semibold text-black">Name</label>
                   <input
-                    className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-3/4"
+                    className="rounded-lg bg-white w-full mt-2 p-2 border-2 focus:outline-none text-black w-3/4"
                     type="text"
                     placeholder="name"
                     disabled
@@ -84,7 +86,7 @@ const Profil = () => {
                 </div>
                 <div className="flex justify-start pt-10">
                   <button
-                    className="shadow bg-[#0D99FF] hover:bg-[#0d86ff] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                    className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
                     type="submit"
                   >
                     Add Product
@@ -92,6 +94,14 @@ const Profil = () => {
                 </div>
               </form>
             </div>
+          </div>
+        </div>
+      </div>
+      <div className="px-20 pt-20 ">
+        <div className="box-border w-full max-h-fitpy-10 bg-[#E5E5E5] rounded-lg pt-10">
+          <span className="pt-10 px-20 font-bold text-xl">Your Product</span>
+          <div className="w-full px-20">
+            <CardProfil label="Remove" />
           </div>
         </div>
       </div>
