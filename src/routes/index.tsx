@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
 import ShoppingCart from "pages/ShoppingCart";
+import ShippingPage from "pages/ShippingPage";
 import Register from "pages/Register";
 import Detail from "pages/Detail";
 import Profil from "pages/Profil";
@@ -31,6 +32,10 @@ const router = createBrowserRouter([
   {
     path: "/mycart",
     element: <ShoppingCart />,
+  },
+  {
+    path: "/shipping",
+    element: <ShippingPage />,
   },
 ]);
 const index = () => {
