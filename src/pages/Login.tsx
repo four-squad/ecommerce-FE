@@ -59,11 +59,11 @@ const Login = () => {
                         >
                             <h2 className="text-4xl text-black text-center font-bold">Login</h2>
                             <div className='my-5 h-6'>
-                                <p className="text-center text-[#0D99FF] my-5"> </p>
+                                <p className="text-center text-black my-5">Selling only the best things online </p>
                             </div>
 
                             <div className="flex flex-col py-2">
-                                <label className="font-semibold text-[#0D99FF]">Email</label>
+                                <label className="font-semibold text-black">Email</label>
                                 <input
                                     onChange={(e) => setEmail(e.target.value)}
                                     className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black"
@@ -72,7 +72,7 @@ const Login = () => {
                                 />
                             </div>
                             <div className="flex flex-col py-2">
-                                <label className="font-semibold text-[#0D99FF]">Password</label>
+                                <label className="font-semibold text-black">Password</label>
                                 <input
                                     onChange={(e) => setPassword(e.target.value)}
                                     type="password"
@@ -83,13 +83,13 @@ const Login = () => {
 
                             <button
                                 type="submit"
-                                className="w-[90%] text-lg flex m-auto my-5 py-2 capitalize bg-[#0D99FF] border-none shadow-lg text-white font-semibold rounded-lg btn hover:bg-[#0d86ff]"
+                                className="w-[90%] text-lg flex m-auto my-5 py-2 capitalize bg-[#967E76]  hover:bg-[#756152] border-none shadow-lg text-white font-semibold rounded-lg btn"
                             >
                                 login
                             </button>
                             <div className="flex justify-center underline my-3">
                                 <Link to="/register">
-                                    <p className="text-[#0D99FF] hover:text-[#0d86ff] font-semibold text-sm">Sign Up</p>
+                                    <p className="text-[#967E76] hover:text-[#756152] font-semibold text-sm">Sign Up</p>
                                 </Link>
                             </div>
                         </form>
