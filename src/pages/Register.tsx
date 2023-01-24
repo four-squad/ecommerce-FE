@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -45,7 +44,7 @@ const Register = () => {
   return (
     <div className="flex w-full h-screen bg-white">
       <div
-        className="w-full h-full bg-no-repeat bg-cover "
+        className="w-full h-full bg-no-repeat bg-cover opacity-95"
         style={{ backgroundImage: `url(${register})` }}
       >
         <div className="h-full flex justify-center items-center">
@@ -131,7 +130,7 @@ const Register = () => {
               </div>
               <div className="flex justify-center py-1 w-64 px-80">
                 <button
-                  className="shadow bg-[#0D99FF] hover:bg-[#0d86ff] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                  className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
                   type="submit"
                 >
                   Register
@@ -139,7 +138,7 @@ const Register = () => {
               </div>
               <div className="flex justify-center w-64 px-80 pb-20">
                 <Link to="/login">
-                  <p className="text-[#0D99FF] hover:text-[#0d86ff] font-semibold text-sm ">
+                  <p className="text-[#967E76] hover:text-[#756152] font-semibold text-sm ">
                     Login
                   </p>
                 </Link>
