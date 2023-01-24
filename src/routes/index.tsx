@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import ShoppingCart from "pages/ShoppingCart";
 import Register from "pages/Register";
 import Detail from "pages/Detail";
 import Profil from "pages/Profil";
@@ -20,12 +21,16 @@ const router = createBrowserRouter([
     element: <Register />,
   },
   {
-    path: "/profil",
+    path: "/profile",
     element: <Profil />,
   },
   {
     path: "/detail",
     element: <Detail />,
+  },
+  {
+    path: "/mycart",
+    element: <ShoppingCart />,
   },
 ]);
 const index = () => {

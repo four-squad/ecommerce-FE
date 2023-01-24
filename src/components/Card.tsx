@@ -8,7 +8,11 @@ interface CardProps {
   title?: string;
   price?: number;
   label?: string;
+  label1?: string;
+  label2?: string;
   onclick?: () => void;
+  onclick1?: () => void;
+  onclick2?: () => void;
   onSubmit?: any;
   desc?: string;
   seller?: string;
@@ -83,8 +87,10 @@ export const CardDetail: FC<CardProps> = ({
 export const CardCart: FC<CardProps> = ({
   title,
   price,
-  label,
-  onclick,
+  label1,
+  label2,
+  onclick1,
+  onclick2,
   onSubmit,
 }) => {
   return (
@@ -102,9 +108,9 @@ export const CardCart: FC<CardProps> = ({
         </p>
         <div className="flex justify-end items-end">
           <Button
-            label={label}
+            label={label1}
             buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-            onClick={onclick}
+            onClick={onclick1}
           />
         </div>
       </div>
@@ -123,9 +129,9 @@ export const CardCart: FC<CardProps> = ({
             </p>
           </div>
           <Button
-            label={label}
+            label={label2}
             buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full"
-            onClick={onclick}
+            onClick={onclick2}
           />
         </form>
       </div>
@@ -136,7 +142,8 @@ export const CardProfil: FC<CardProps> = ({
   title,
   price,
   label,
-  onclick,
+  onclick1,
+  onclick2,
   onSubmit,
 }) => {
   return (
@@ -152,19 +159,19 @@ export const CardProfil: FC<CardProps> = ({
           </span>
           $ {price}
         </p>
-        <div className="flex row px-40">
+        <div className="flex flex-row px-40">
           <div className="flex justify-end items-end">
             <Button
               label={label}
               buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-              onClick={onclick}
+              onClick={onclick1}
             />
           </div>
           <div className="flex justify-end items-end">
             <Button
               label="Edit"
               buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-              onClick={onclick}
+              onClick={onclick2}
             />
           </div>
         </div>
