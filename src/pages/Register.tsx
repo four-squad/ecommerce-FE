@@ -1,6 +1,47 @@
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { Link } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
+
 import register from "assets/bg-register.jpg";
 
 const Register = () => {
+  const [name, setName] = useState<string>("");
+  const [alamat, setAlamat] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const navigate = useNavigate();
+
+  function registerHandler(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    axios
+      .post("https://remotecareer.tech/register", {
+        name: name,
+        alamat: alamat,
+        email: email,
+        password: password,
+      })
+      .then((res) => {
+        const { message, data } = res.data;
+
+        Swal.fire({
+          title: "Success",
+          text: message,
+          showCancelButton: false,
+        });
+        navigate("/login");
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Register failed",
+        });
+      });
+  }
+
   return (
     <div className="flex w-full h-screen bg-white">
       <div
@@ -9,7 +50,10 @@ const Register = () => {
       >
         <div className="h-full flex justify-center items-center">
           <div className="w-1/2 h-3/4 flex justify-center bg-[#E5E5E5] rounded-2xl shadow-2xl">
-            <form className="w-[90%] align-middle m-10 ">
+            <form
+              className="w-[90%] align-middle m-10 "
+              onSubmit={(e) => registerHandler(e)}
+            >
               <h2 className="text-4xl text-black text-center font-bold">
                 Register
               </h2>
@@ -25,6 +69,9 @@ const Register = () => {
                     id="inline-full-name"
                     type="text"
                     placeholder="name"
+                    onChange={(e) => {
+                      setName(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -40,6 +87,9 @@ const Register = () => {
                     id="inline-email"
                     type="email"
                     placeholder=" email"
+                    onChange={(e) => {
+                      setEmail(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -55,6 +105,9 @@ const Register = () => {
                     id="inline-full-username"
                     type="text"
                     placeholder="alamat"
+                    onChange={(e) => {
+                      setAlamat(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -70,6 +123,9 @@ const Register = () => {
                     id="inline-password"
                     type="password"
                     placeholder="Password"
+                    onChange={(e) => {
+                      setPassword(e.target.value);
+                    }}
                   />
                 </div>
               </div>
@@ -82,9 +138,11 @@ const Register = () => {
                 </button>
               </div>
               <div className="flex justify-center w-64 px-80 pb-20">
-                <p className="text-[#0D99FF] hover:text-[#0d86ff] font-semibold text-sm ">
-                  Login
-                </p>
+                <Link to="/login">
+                  <p className="text-[#0D99FF] hover:text-[#0d86ff] font-semibold text-sm ">
+                    Login
+                  </p>
+                </Link>
               </div>
             </form>
           </div>
