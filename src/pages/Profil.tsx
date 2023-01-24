@@ -50,7 +50,7 @@ const Profil = () => {
                 <div className="flex flex-col pt-20">
                   <label className="font-semibold text-black">Name</label>
                   <input
-                    className="rounded-lg bg-white w-full mt-2 p-2 border-2 focus:outline-none text-black w-3/4"
+                    className="rounded-lg bg-white mt-2 p-2 border-2 focus:outline-none text-black w-3/4"
                     type="text"
                     placeholder="name"
                     disabled

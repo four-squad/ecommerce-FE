@@ -36,7 +36,7 @@ export const CardHome: FC<CardProps> = ({ title, price, label, onclick }) => {
         <div className="card-actions w-full">
           <Button
             label={label}
-            buttonSet="text-xs md:text-base normal-case bg-[#0D99FF] hover:bg-[#0d86ff] border-none text-white "
+            buttonSet="text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white "
             onClick={onclick}
           />
         </div>
@@ -71,7 +71,7 @@ export const CardDetail: FC<CardProps> = ({
         <div className="card-actions justify-end">
           <Button
             label={label}
-            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#0D99FF] hover:bg-[#0d86ff] border-none text-white w-full"
+            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full"
             onClick={onclick}
           />
         </div>
@@ -103,7 +103,7 @@ export const CardCart: FC<CardProps> = ({
         <div className="flex justify-end items-end">
           <Button
             label={label}
-            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#0D99FF] hover:bg-[#0d86ff] border-none text-white w-full mb-1"
+            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
             onClick={onclick}
           />
         </div>
@@ -124,7 +124,7 @@ export const CardCart: FC<CardProps> = ({
           </div>
           <Button
             label={label}
-            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#0D99FF] hover:bg-[#0d86ff] border-none text-white w-full"
+            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full"
             onClick={onclick}
           />
         </form>
@@ -140,7 +140,7 @@ export const CardProfil: FC<CardProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="card card-side bg-white shadow-xl ">
+    <div className="card card-side bg-white shadow-xl">
       <figure className="w-1/3 h-64 m-5 rounded-md ">
         <img src="https://placeimg.com/200/280/arch" />
       </figure>
@@ -152,11 +152,11 @@ export const CardProfil: FC<CardProps> = ({
           </span>
           $ {price}
         </p>
-        <div className="flex flex row px-40">
+        <div className="flex row px-40">
           <div className="flex justify-end items-end">
             <Button
               label={label}
-              buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76] hover:bg-[#756152] border-none text-white w-full mb-1"
+              buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
               onClick={onclick}
             />
           </div>
