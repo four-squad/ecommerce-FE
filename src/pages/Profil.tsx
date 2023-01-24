@@ -24,21 +24,118 @@ const Profil = () => {
                         </div>
 
                         <div className="mx-auto my-5 flex justify-center">
-                          <button
-                            className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                            type="submit"
+                          <label
+                            htmlFor="my-modal-6"
+                            className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
                           >
                             Update Profile
-                          </button>
+                          </label>
                         </div>
+                        {/* modal edit profil */}
+                        <form>
+                          <input
+                            type="checkbox"
+                            id="my-modal-6"
+                            className="modal-toggle "
+                          />
+                          <div className="modal modal-bottom sm:modal-middle ">
+                            <div className="modal-box bg-[#E5E5E5]">
+                              <h3 className="font-bold text-lg">
+                                Edit Account
+                              </h3>
+                              <div className="flex flex-row gap-20 pb-3">
+                                <p>Name</p>
+                                <input
+                                  type="text"
+                                  placeholder="Type here"
+                                  className="input w-full max-w-xs bg-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-row gap-20 pb-3">
+                                <p>Email</p>
+                                <input
+                                  type="text"
+                                  placeholder="Type here"
+                                  className="input w-full max-w-xs bg-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-row gap-16 pb-3">
+                                <p>Alamat</p>
+                                <input
+                                  type="text"
+                                  placeholder="Type here"
+                                  className="input w-full max-w-xs bg-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-row gap-12 pb-3">
+                                <p>Password</p>
+                                <input
+                                  type="text"
+                                  placeholder="Type here"
+                                  className="input w-full max-w-xs bg-white text-black"
+                                />
+                              </div>
+                              <div className="flex flex-col justify-center items-center mt-10">
+                                <label
+                                  htmlFor="edit-photo"
+                                  style={{ cursor: "pointer" }}
+                                  className={"p-2 bg-slate-300 mb-4 font-bold"}
+                                >
+                                  Upload Photo
+                                </label>
+                                <input
+                                  type="file"
+                                  accept="image/*"
+                                  id="edit-photo"
+                                  style={{ display: "none" }}
+                                />
+                                <img src="" alt="" width={200} />
+                              </div>
+                              <div className="modal-action">
+                                <button
+                                  type="submit"
+                                  className="btn bg-[#967E76] hover:bg-[#756152]"
+                                >
+                                  Update
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                        {/* akhir modal edit profil */}
                         <div className="mx-auto my-5 flex justify-center">
-                          <button
-                            className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                            type="submit"
+                          <label
+                            htmlFor="modal-delete"
+                            className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
                           >
                             Delete Profile
-                          </button>
+                          </label>
                         </div>
+                        {/* modal delete */}
+                        <input
+                          type="checkbox"
+                          id="modal-delete"
+                          className="modal-toggle"
+                        />
+                        <div className="modal modal-bottom sm:modal-middle">
+                          <div className="modal-box">
+                            <h3 className="font-bold text-lg">
+                              Apakah anda yakin untuk menghapus akun anda?
+                            </h3>
+                            <div className="modal-action">
+                              <button className="btn bg-[#967E76] hover:bg-[#756152]">
+                                Hapus
+                              </button>
+                              <label
+                                htmlFor="modal-delete"
+                                className="btn bg-[#967E76] hover:bg-[#756152]"
+                              >
+                                Cancel
+                              </label>
+                            </div>
+                          </div>
+                        </div>
+                        {/* akhir modal delete */}
                       </div>
                     </div>
                   </div>
@@ -84,15 +181,78 @@ const Profil = () => {
                     disabled
                   />
                 </div>
-                <div className="flex justify-start pt-10">
-                  <button
-                    className="shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                    type="submit"
-                  >
-                    Add Product
-                  </button>
+              </form>
+              <div className="flex justify-start pt-10">
+                <label
+                  htmlFor="my-modal-product"
+                  className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                >
+                  Add Product
+                </label>
+              </div>
+              {/* modal add product */}
+              <form>
+                <input
+                  type="checkbox"
+                  id="my-modal-product"
+                  className="modal-toggle "
+                />
+                <div className="modal modal-bottom sm:modal-middle ">
+                  <div className="modal-box bg-[#E5E5E5]">
+                    <h3 className="font-bold text-lg">Add Product</h3>
+                    <div className="flex flex-row gap-28 pb-3">
+                      <p>Title</p>
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input w-full max-w-xs bg-white text-black"
+                      />
+                    </div>
+                    <div className="flex flex-row gap-28 pb-3">
+                      <p>Price</p>
+                      <input
+                        type="number"
+                        placeholder="Type here"
+                        className="input w-full max-w-xs bg-white text-black"
+                      />
+                    </div>
+                    <div className="flex flex-row gap-16 pb-3">
+                      <p>Description</p>
+                      <input
+                        type="text"
+                        placeholder="Type here"
+                        className="input w-full max-w-xs bg-white text-black"
+                      />
+                    </div>
+
+                    <div className="flex flex-col justify-center items-center mt-10">
+                      <label
+                        htmlFor="edit-photo"
+                        style={{ cursor: "pointer" }}
+                        className={"p-2 bg-slate-300 mb-4 font-bold"}
+                      >
+                        Upload Product Image
+                      </label>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        id="edit-photo"
+                        style={{ display: "none" }}
+                      />
+                      <img src="" alt="" width={200} />
+                    </div>
+                    <div className="modal-action">
+                      <button
+                        type="submit"
+                        className="btn bg-[#967E76] hover:bg-[#756152]"
+                      >
+                        Update
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </form>
+              {/* akhir modal add product */}
             </div>
           </div>
         </div>
