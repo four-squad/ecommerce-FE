@@ -1,8 +1,9 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import Register from "pages/Register";
+import Profil from "pages/Profil";
 import LandingPage from "pages";
 import Login from "pages/Login";
-import Register from "pages/Register";
 
 const router = createBrowserRouter([
   {
@@ -16,6 +17,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <Register />,
+  },
+  {
+    path: "/profil",
+    element: <Profil />,
   },
 ]);
 const index = () => {
