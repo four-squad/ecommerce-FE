@@ -30,6 +30,8 @@ const Navbar = () => {
                     timer: 1500,
                 });
                 removeCookie("token");
+                removeCookie("avatar");
+                removeCookie("name");
                 navigate("/");
                 navigate(0);
             }
@@ -52,7 +54,17 @@ const Navbar = () => {
             </div>
             <div className="navbar-end mr-10">
                 <div className='flex justify-between'>
-                    <p className='text-white'>Hello, Yudha</p>
+                    {
+                        cookie.name ? (
+                            <>
+                                <div onClick={() => logOutHandler()}>
+                                    <p className='text-white font-semibold'>Hi, {cookie.name}</p>
+                                </div>
+                            </>
+                        ) : (
+                            null
+                        )
+                    }
                 </div>
                 <div className='flex justify-between mx-2'>
                     <label tabIndex={0} className="btn btn-ghost btn-circle">
