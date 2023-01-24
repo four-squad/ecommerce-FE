@@ -10,6 +10,7 @@ interface CardProps {
   label?: string;
   label1?: string;
   label2?: string;
+  image?: string;
   onclick?: () => void;
   onclick1?: () => void;
   onclick2?: () => void;
@@ -18,12 +19,12 @@ interface CardProps {
   seller?: string;
 }
 
-export const CardHome: FC<CardProps> = ({ title, price, label, onclick }) => {
+export const CardHome: FC<CardProps> = ({ title, price, label, image, onclick }) => {
   return (
     <div className="card bg-white shadow-xl rounded-md ">
       <figure className="m-2 md:m-4 h-32 md:h-56 rounded-md">
         <img
-          src="https://placeimg.com/400/225/arch"
+          src={image}
           className="w-full h-full"
         />
       </figure>
@@ -53,6 +54,7 @@ export const CardDetail: FC<CardProps> = ({
   title,
   price,
   label,
+  image,
   desc,
   seller,
   onclick,
@@ -60,7 +62,7 @@ export const CardDetail: FC<CardProps> = ({
   return (
     <div className="card lg:card-side bg-white shadow-xl">
       <figure className="p-8">
-        <img src="https://placeimg.com/400/400/arch" className="rounded-md" />
+        <img src={image} className="rounded-md" />
       </figure>
       <div className="card-body">
         <h2 className="card-title text-black font-bold capitalize">
@@ -89,6 +91,7 @@ export const CardCart: FC<CardProps> = ({
   price,
   label1,
   label2,
+  image,
   onclick1,
   onclick2,
   onSubmit,
@@ -96,7 +99,7 @@ export const CardCart: FC<CardProps> = ({
   return (
     <div className="card card-side bg-white shadow-xl">
       <figure className="w-1/3 h-64 m-5 rounded-md ">
-        <img src="https://placeimg.com/200/280/arch" />
+        <img src={image} />
       </figure>
       <div className="card-body w-2/3 pr-0">
         <h2 className="card-title text-black ">{title}</h2>
@@ -143,6 +146,7 @@ export const CardProfil: FC<CardProps> = ({
   title,
   price,
   label,
+  image,
   onclick1,
   onclick2,
   onSubmit,
@@ -150,7 +154,7 @@ export const CardProfil: FC<CardProps> = ({
   return (
     <div className="card card-side bg-white shadow-xl">
       <figure className="w-1/3 h-64 m-5 rounded-md ">
-        <img src="https://placeimg.com/200/280/arch" />
+        <img src={image} />
       </figure>
       <div className="card-body w-2/3 pr-0">
         <h2 className="card-title text-black ">{title}</h2>
@@ -171,7 +175,7 @@ export const CardProfil: FC<CardProps> = ({
           <div className="flex justify-end items-end">
             <label
               htmlFor="edit-modal"
-              className="btn w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
+              className="btn w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white mb-1"
             >
               Edit
             </label>
