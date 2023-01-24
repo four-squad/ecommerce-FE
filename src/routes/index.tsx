@@ -1,12 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
+import SaleHistory from "pages/SaleHistory";
+import PurchaseHistory from "pages/PurchaseHistory";
 import ShoppingCart from "pages/ShoppingCart";
 import ShippingPage from "pages/ShippingPage";
-import Register from "pages/Register";
+import Register from "pages/Auth/Register";
 import Detail from "pages/Detail";
 import Profil from "pages/Profil";
 import LandingPage from "pages";
-import Login from "pages/Login";
+import Login from "pages/Auth/Login";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +38,14 @@ const router = createBrowserRouter([
   {
     path: "/shipping",
     element: <ShippingPage />,
+  },
+  {
+    path: "/purchase",
+    element: <PurchaseHistory />,
+  },
+  {
+    path: "/sale",
+    element: <SaleHistory />,
   },
 ]);
 const index = () => {
