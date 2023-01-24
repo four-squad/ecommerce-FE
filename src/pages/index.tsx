@@ -1,5 +1,6 @@
 import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai"
 import React, { useState, useEffect } from 'react'
+import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
 import Layout from 'components/Layout'
@@ -14,6 +15,7 @@ interface ProductType {
 
 const index = () => {
   const [product, setProduct] = useState<ProductType[]>([])
+  const navigate = useNavigate()
 
   function fetchData() {
     axios
@@ -31,6 +33,9 @@ const index = () => {
     fetchData();
   }, [])
 
+  function onClickDetail(id: number){
+    navigate(`/detail/${id}`)
+  }
   return (
     <Layout>
       <div className="px-20 pt-20 ">
@@ -46,6 +51,7 @@ const index = () => {
                     price={data.price}
                     image={data.image}
                     label={"add to cart"}
+                    onClickDetail={()=>onClickDetail(data.id)}
                     onclick={() => console.log("haha")}
                   />
                 )

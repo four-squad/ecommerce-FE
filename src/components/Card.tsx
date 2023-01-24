@@ -14,25 +14,26 @@ interface CardProps {
   onclick?: () => void;
   onclick1?: () => void;
   onclick2?: () => void;
+  onClickDetail?: () => void;
   onSubmit?: any;
   desc?: string;
   seller?: string;
 }
 
-export const CardHome: FC<CardProps> = ({ title, price, label, image, onclick }) => {
+export const CardHome: FC<CardProps> = ({ title, price, label, image, onClickDetail, onclick }) => {
   return (
     <div className="card bg-white shadow-xl rounded-md ">
-      <figure className="m-2 md:m-4 h-32 md:h-56 rounded-md">
+      <figure className="m-2 md:m-4 h-32 md:h-56 rounded-md" onClick={onClickDetail}>
         <img
           src={image}
           className="w-full h-full"
         />
       </figure>
       <div className="card-body p-2">
-        <h2 className="card-title text-sm md:text-xl font-semibold text-black px-1 md:px-2">
+        <h2 className="card-title text-sm md:text-xl font-semibold text-black px-1 md:px-2" onClick={onClickDetail}>
           {title}
         </h2>
-        <p className="flex justify-start text-black text-sm md:text-lg">
+        <p className="flex justify-start text-black text-sm md:text-lg" onClick={onClickDetail}>
           <span className="flex justify-start items-center px-2">
             <ImPriceTags color="black" />
           </span>
@@ -61,14 +62,14 @@ export const CardDetail: FC<CardProps> = ({
 }) => {
   return (
     <div className="card lg:card-side bg-white shadow-xl">
-      <figure className="p-8">
+      <figure className="p-8 w-1/4">
         <img src={image} className="rounded-md" />
       </figure>
       <div className="card-body">
         <h2 className="card-title text-black font-bold capitalize">
-          title{title}
+          {title}
         </h2>
-        <p className="text-black">desc{desc}</p>
+        <p className="text-black">{desc}</p>
         <div className="my-5">
           <p className="font-bold capitalize text-black">price: $ {price}</p>
           <p className="font-bold capitalize text-black">seller: {seller}</p>
