@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useCookies } from "react-cookie";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 import { CardProfil } from "components/Card";
@@ -11,6 +12,22 @@ const Profil = () => {
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [cookie, setCookie] = useCookies();
+
+  //edit
+  const [editName, setEditName] = useState<string>("");
+  const [editEmail, setEditEmail] = useState<string>("");
+  const [editAddress, setEditAddress] = useState<string>("");
+  const [editAvatar, setEditAvatar] = useState<any>();
+  const [newPreviewImage, setNewPreviewImage] = useState<any>();
+
+  const handleEditImage = (file: any) => {
+    setEditAvatar(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setNewPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
 
   function getProfil() {
     const config = {
@@ -35,6 +52,41 @@ const Profil = () => {
   useEffect(() => {
     getProfil();
   }, []);
+
+  //update profil
+  function editProfil(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const formData = new FormData();
+    formData.append("name", editName);
+
+    formData.append("address", editAddress);
+    formData.append("email", editEmail);
+
+    formData.append("avatar", editAvatar);
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    };
+    axios
+      .put(`https://remotecareer.tech/users`, formData, config)
+      .then((ress) => {
+        Swal.fire({
+          title: "Success",
+          text: "Berhasil mengubah akun",
+          showCancelButton: false,
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
+      })
+      .catch((error) => {
+        alert(error);
+      });
+  }
 
   return (
     <>
@@ -61,86 +113,102 @@ const Profil = () => {
                           </div>
 
                           <div className="mx-auto my-5 flex justify-center">
-                            <label
-                              htmlFor="my-modal-6"
-                              className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
-                            >
-                              Update Profile
-                            </label>
-                          </div>
-                          {/* modal edit profil */}
-                          <form>
-                            <input
-                              type="checkbox"
-                              id="my-modal-6"
-                              className="modal-toggle "
-                            />
-                            <div className="modal modal-bottom sm:modal-middle ">
-                              <div className="modal-box bg-[#E5E5E5]">
-                                <h3 className="font-bold text-lg">
-                                  Edit Account
-                                </h3>
-                                <div className="flex flex-row gap-20 pb-3">
-                                  <p>Name</p>
-                                  <input
-                                    type="text"
-                                    placeholder="Type here"
-                                    className="input w-full max-w-xs bg-white text-black"
-                                  />
-                                </div>
-                                <div className="flex flex-row gap-20 pb-3">
-                                  <p>Email</p>
-                                  <input
-                                    type="text"
-                                    placeholder="Type here"
-                                    className="input w-full max-w-xs bg-white text-black"
-                                  />
-                                </div>
-                                <div className="flex flex-row gap-16 pb-3">
-                                  <p>Alamat</p>
-                                  <input
-                                    type="text"
-                                    placeholder="Type here"
-                                    className="input w-full max-w-xs bg-white text-black"
-                                  />
-                                </div>
-                                <div className="flex flex-row gap-12 pb-3">
-                                  <p>Password</p>
-                                  <input
-                                    type="text"
-                                    placeholder="Type here"
-                                    className="input w-full max-w-xs bg-white text-black"
-                                  />
-                                </div>
-                                <div className="flex flex-col justify-center items-center mt-10">
-                                  <label
-                                    htmlFor="edit-photo"
-                                    style={{ cursor: "pointer" }}
-                                    className={
-                                      "p-2 bg-slate-300 mb-4 font-bold"
-                                    }
-                                  >
-                                    Upload Photo
-                                  </label>
-                                  <input
-                                    type="file"
-                                    accept="image/*"
-                                    id="edit-photo"
-                                    style={{ display: "none" }}
-                                  />
-                                  <img src="" alt="" width={200} />
-                                </div>
-                                <div className="modal-action">
-                                  <button
-                                    type="submit"
-                                    className="btn bg-[#967E76] hover:bg-[#756152]"
-                                  >
-                                    Update
-                                  </button>
+                            <form onSubmit={editProfil}>
+                              <label
+                                htmlFor="my-modal-6"
+                                className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                              >
+                                Update Profile
+                              </label>
+
+                              {/* modal edit profil */}
+
+                              <input
+                                type="checkbox"
+                                id="my-modal-6"
+                                className="modal-toggle "
+                              />
+                              <div className="modal modal-bottom sm:modal-middle ">
+                                <div className="modal-box bg-[#E5E5E5]">
+                                  <h3 className="font-bold text-lg">
+                                    Edit Account
+                                  </h3>
+                                  <div className="flex flex-row gap-20 pb-3">
+                                    <p>Name</p>
+                                    <input
+                                      type="text"
+                                      placeholder="Type here"
+                                      className="input w-full max-w-xs bg-white text-black"
+                                      value={editName}
+                                      onChange={(e) =>
+                                        setEditName(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                  <div className="flex flex-row gap-20 pb-3">
+                                    <p>Email</p>
+                                    <input
+                                      type="text"
+                                      placeholder="Type here"
+                                      className="input w-full max-w-xs bg-white text-black"
+                                      value={editEmail}
+                                      onChange={(e) =>
+                                        setEditEmail(e.target.value)
+                                      }
+                                    />
+                                  </div>
+                                  <div className="flex flex-row gap-16 pb-3">
+                                    <p>Alamat</p>
+                                    <input
+                                      type="text"
+                                      placeholder="Type here"
+                                      className="input w-full max-w-xs bg-white text-black"
+                                      value={editAddress}
+                                      onChange={(e) =>
+                                        setEditAddress(e.target.value)
+                                      }
+                                    />
+                                  </div>
+
+                                  <div className="flex flex-col justify-center items-center mt-10">
+                                    <label
+                                      htmlFor="edit-photo"
+                                      style={{ cursor: "pointer" }}
+                                      className={
+                                        "p-2 bg-slate-300 mb-4 font-bold"
+                                      }
+                                    >
+                                      Upload Photo
+                                    </label>
+                                    <input
+                                      type="file"
+                                      accept="image/*"
+                                      id="edit-photo"
+                                      style={{ display: "none" }}
+                                      onChange={(e) => {
+                                        if (!e.target.files) return;
+                                        handleEditImage(e.target.files[0]);
+                                      }}
+                                    />
+                                    <img
+                                      src={newPreviewImage}
+                                      alt=""
+                                      width={200}
+                                      height={100}
+                                    />
+                                  </div>
+                                  <div className="modal-action">
+                                    <button
+                                      type="submit"
+                                      className="btn bg-[#967E76] hover:bg-[#756152]"
+                                    >
+                                      Update
+                                    </button>
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          </form>
+                            </form>
+                          </div>
                           {/* akhir modal edit profil */}
                           <div className="mx-auto my-5 flex justify-center">
                             <label
