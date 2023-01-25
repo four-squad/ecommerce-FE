@@ -153,7 +153,7 @@ export const CardProfil: FC<CardProps> = ({
   onSubmit,
 }) => {
   return (
-    <div className="card card-side bg-white shadow-xl">
+    <div className="card card-side bg-white shadow-xl my-5">
       <figure className="w-1/3 h-64 m-5 rounded-md ">
         <img src={image} />
       </figure>

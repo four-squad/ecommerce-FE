@@ -7,12 +7,15 @@ import axios from "axios";
 import { CardProfil } from "components/Card";
 import Layout from "components/Layout";
 
+import { ProductType } from 'utils/type'
+
 const Profil = () => {
   const [name, setName] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [cookie, setCookie, removeCookie] = useCookies();
+  const [myProduct, setMyProduct] = useState<ProductType[]>([])
   const navigate = useNavigate();
 
   //edit profile
@@ -57,12 +60,13 @@ const Profil = () => {
     axios
       .get(`https://remotecareer.tech/users`, config)
       .then((ress) => {
-        const { email, address, name, avatar } = ress.data.data;
+        const { email, address, name, avatar, products } = ress.data.data;
         setEmail(email);
         setName(name);
         setAddress(address);
         setAvatar(avatar);
-        console.log("data profil", ress);
+        setMyProduct(products)
+        console.log("data profil", products);
       })
       .catch((error) => {
         alert(error);
@@ -437,7 +441,21 @@ const Profil = () => {
           <div className="box-border w-full max-h-fitpy-10 bg-[#E5E5E5] rounded-lg pt-10">
             <span className="pt-10 px-20 font-bold text-xl">Your Product</span>
             <div className="w-full px-20">
-              <CardProfil label="Remove" />
+              <div className="">
+                {
+                  myProduct.map((data) => {
+                    return (
+                      <CardProfil
+                        key={data.id}
+                        label="Remove"
+                        title={data.title}
+                        price={data.price}
+                        image={data.image}
+                      />
+                    )
+                  })
+                }
+              </div>
             </div>
           </div>
         </div>
