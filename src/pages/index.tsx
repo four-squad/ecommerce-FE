@@ -1,17 +1,11 @@
-import { AiOutlineLeftCircle, AiOutlineRightCircle } from "react-icons/ai"
 import React, { useState, useEffect } from 'react'
 import { useNavigate } from "react-router-dom"
 import axios from "axios"
 
-import Layout from 'components/Layout'
 import { CardHome } from 'components/Card'
+import Layout from 'components/Layout'
 
-interface ProductType {
-  id: number
-  title: string
-  image: string
-  price: number
-}
+import { ProductType } from 'utils/type'
 
 const index = () => {
   const [product, setProduct] = useState<ProductType[]>([])
@@ -21,19 +15,17 @@ const index = () => {
     axios
       .get("https://remotecareer.tech/products")
       .then((res) => {
-        console.log("yey", res)
         const { data } = res.data
         setProduct(data)
       })
       .catch((err) => {
-        console.log("nay", err)
       })
   }
   useEffect(() => {
     fetchData();
   }, [])
 
-  function onClickDetail(id: number){
+  function onClickDetail(id: number) {
     navigate(`/detail/${id}`)
   }
   return (
@@ -51,28 +43,13 @@ const index = () => {
                     price={data.price}
                     image={data.image}
                     label={"add to cart"}
-                    onClickDetail={()=>onClickDetail(data.id)}
+                    onClickDetail={() => onClickDetail(data.id)}
                     onclick={() => console.log("haha")}
                   />
                 )
               })
             }
-
           </div>
-          {/* <div className="flex w-full my-10 ">
-            <div className='flex w-full justify-end mr-5 text-base-100 dark:text-black'>
-              <div className='mx-2'>
-                <AiOutlineLeftCircle size={35}
-                // onClick={() => prevPage()}
-                />
-              </div>
-              <div className='mx-2'>
-                <AiOutlineRightCircle size={35}
-                // onClick={() => nextPage()}
-                />
-              </div>
-            </div>
-          </div> */}
         </div>
       </div>
     </Layout>

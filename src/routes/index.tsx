@@ -1,14 +1,14 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 
-import SaleHistory from "pages/SaleHistory";
 import PurchaseHistory from "pages/PurchaseHistory";
 import ShoppingCart from "pages/ShoppingCart";
 import ShippingPage from "pages/ShippingPage";
+import SaleHistory from "pages/SaleHistory";
 import Register from "pages/Auth/Register";
+import Login from "pages/Auth/Login";
 import Detail from "pages/Detail";
 import Profil from "pages/Profil";
 import LandingPage from "pages";
-import Login from "pages/Auth/Login";
 
 const router = createBrowserRouter([
   {

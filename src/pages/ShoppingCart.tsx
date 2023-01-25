@@ -1,7 +1,9 @@
-import Button from 'components/Button'
-import { CardCart } from 'components/Card'
-import Layout from 'components/Layout'
 import React from 'react'
+
+import { CardCart } from 'components/Card'
+import Button from 'components/Button'
+import Layout from 'components/Layout'
+
 
 const ShoppingCart = () => {
     return (
@@ -18,7 +20,7 @@ const ShoppingCart = () => {
                         onclick2={() => console.log("checkout")}
                     />
 
-                    <div className='flex justify-end w-full'>
+                    {/* <div className='flex justify-end w-full'>
                         <div className='bg-white w-1/3 h-full my-10 rounded-lg shadow-xl'>
                             <div className='p-5'>
                                 <p className='text-black'>Total Quantity: 2</p>
@@ -30,7 +32,7 @@ const ShoppingCart = () => {
                             </div>
                         </div>
 
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </Layout>

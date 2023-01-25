@@ -19,7 +19,6 @@ const Login = () => {
             password: password
         })
         .then((res) => {
-            console.log("berhasil", res.data)
             const {message, token} = res.data
             const {avatar, name} = res.data.data
             Swal.fire({
@@ -35,7 +34,6 @@ const Login = () => {
             navigate('/')
         })
         .catch((err) => {
-            console.log("gagal", err)
             Swal.fire({
                 icon: "error",
                 title: "Oops...",
