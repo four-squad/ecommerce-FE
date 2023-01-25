@@ -7,10 +7,10 @@ import axios from "axios";
 import register from "assets/bg-register.jpg";
 
 const Register = () => {
-  const [name, setName] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
   const [address, setAddress] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
+  const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
   function registerHandler(e: React.FormEvent<HTMLFormElement>) {
@@ -24,12 +24,13 @@ const Register = () => {
       })
       .then((res) => {
         const { message, data } = res.data;
-
         Swal.fire({
-          title: "Success",
+          position: "center",
+          icon: "success",
           text: message,
-          showCancelButton: false,
-        });
+          showConfirmButton: false,
+          timer: 1500,
+        })
         navigate("/login");
       })
       .catch((error) => {

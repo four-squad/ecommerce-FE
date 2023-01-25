@@ -1,8 +1,8 @@
+import { ImPriceTags } from "react-icons/im";
+
 import { TextArea } from "components/CustomInput";
 import Button from "components/Button";
 import Layout from "components/Layout";
-
-import { ImPriceTags } from "react-icons/im";
 
 const ShippingPage = () => {
   return (

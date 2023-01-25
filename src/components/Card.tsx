@@ -1,8 +1,8 @@
 import { ImPriceTags } from "react-icons/im";
 import React, { FC } from "react";
 
-import Button from "./Button";
 import { CustomInput } from "./CustomInput";
+import Button from "./Button";
 
 interface CardProps {
   title?: string;
@@ -33,7 +33,7 @@ export const CardHome: FC<CardProps> = ({ title, price, label, image, onClickDet
         <h2 className="card-title text-sm md:text-xl font-semibold text-black px-1 md:px-2" onClick={onClickDetail}>
           {title}
         </h2>
-        <p className="flex justify-start text-black text-sm md:text-lg" onClick={onClickDetail}>
+        <p className="flex justify-start text-black text-sm md:text-lg items-center" onClick={onClickDetail}>
           <span className="flex justify-start items-center px-2">
             <ImPriceTags color="black" />
           </span>

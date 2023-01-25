@@ -10,36 +10,36 @@ import Layout from "components/Layout";
 import { ProductType } from "utils/type";
 
 const Profil = () => {
-  const [name, setName] = useState<string>("");
+  const [myProduct, setMyProduct] = useState<ProductType[]>([]);
+  const [cookie, setCookie, removeCookie] = useCookies();
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [cookie, setCookie, removeCookie] = useCookies();
-  const [myProduct, setMyProduct] = useState<ProductType[]>([]);
+  const [name, setName] = useState<string>(""); 
   const navigate = useNavigate();
 
   //edit profile
-  const [editName, setEditName] = useState<string>("");
-  const [editEmail, setEditEmail] = useState<string>("");
-  const [editAddress, setEditAddress] = useState<string>("");
+  const [newPreviewImage, setNewPreviewImage] = useState<any>()
   const [editPassword, setEditPassword] = useState<string>("");
+  const [editAddress, setEditAddress] = useState<string>("");
+  const [editEmail, setEditEmail] = useState<string>("");
+  const [editName, setEditName] = useState<string>("");
   const [editAvatar, setEditAvatar] = useState<any>();
-  const [newPreviewImage, setNewPreviewImage] = useState<any>();
 
   //add product
+  const [previewAddImg, setPreviewAddImg] = useState<any>();
   const [addTitle, setAddTitle] = useState<string>("");
   const [addPrice, setAddPrice] = useState<string>("");
   const [addDesc, setAddDesc] = useState<string>("");
   const [addImg, setAddImg] = useState<any>();
-  const [previewAddImg, setPreviewAddImg] = useState<any>();
 
   //edit product
+  const [previeweditImg, setPreviewEditImg] = useState<any>();
   const [editTitle, setEditTitle] = useState<string>("");
   const [editPrice, setEditPrice] = useState<string>("");
+  const [idProduct, setIdProduct] = useState<number>();
   const [editDesc, setEditDesc] = useState<string>("");
   const [editImg, setEditImg] = useState<any>();
-  const [previeweditImg, setPreviewEditImg] = useState<any>();
-  const [idProduct, setIdProduct] = useState<number>();
 
   const handleEditImage = (file: any) => {
     setEditAvatar(file);
@@ -83,7 +83,6 @@ const Profil = () => {
         setAddress(address);
         setAvatar(avatar);
         setMyProduct(products);
-        console.log("data product", products);
       })
       .catch((error) => {
         alert(error);
@@ -186,7 +185,6 @@ const Profil = () => {
         },
       })
       .then((res) => {
-        console.log("file terupload: ", res);
         Swal.fire({
           title: "Success",
           text: "Berhasil mengupload product",
@@ -199,7 +197,6 @@ const Profil = () => {
         });
       })
       .catch((err) => {
-        console.log("gagal: ", err);
       });
   }
 
@@ -226,7 +223,6 @@ const Profil = () => {
         },
       })
       .then((ress) => {
-        console.log("yey: ", ress);
         Swal.fire({
           title: "Success",
           text: "Berhasil mengupdate product",
@@ -239,7 +235,6 @@ const Profil = () => {
         });
       })
       .catch((err) => {
-        console.log("nay", err);
       });
   }
 
@@ -251,7 +246,6 @@ const Profil = () => {
         },
       })
       .then((res) => {
-        console.log("yey: ", res);
         Swal.fire({
           title: "Are you sure want to delete product?",
           // text: "You won't be able to revert this!",
@@ -275,7 +269,6 @@ const Profil = () => {
         });
       })
       .catch((err) => {
-        console.log("nay: ", err);
       });
   }
 

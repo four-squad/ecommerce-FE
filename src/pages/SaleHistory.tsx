@@ -1,7 +1,7 @@
 import {ImPriceTags} from 'react-icons/im'
+import React from 'react'
 
 import Layout from 'components/Layout'
-import React from 'react'
 
 const SaleHistory = () => {
     return (

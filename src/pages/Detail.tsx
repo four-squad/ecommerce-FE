@@ -21,12 +21,10 @@ const Detail = () => {
   function fetchDetail() {
     axios.get(`https://remotecareer.tech/products/${id}`)
       .then((res) => {
-        console.log("yey", res)
         const { data } = res.data
         setDetail(data)
       })
       .catch((err) => {
-        console.log("nay", err)
       })
   }
 
