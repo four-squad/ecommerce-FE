@@ -186,6 +186,41 @@ const Profil = () => {
       });
   }
 
+  function onDeleteProduct(id: number) {
+    axios.delete(`https://remotecareer.tech/products/${id}`, {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    })
+      .then((res) => {
+        console.log("yey: ", res)
+        Swal.fire({
+          title: "Are you sure want to delete product?",
+          // text: "You won't be able to revert this!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Yes",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "No",
+      }).then((result) => {
+          if (result.isConfirmed) {
+              Swal.fire({
+                  position: "center",
+                  icon: "success",
+                  text: "Delete successfully",
+                  showConfirmButton: false,
+                  timer: 1500,
+              });
+              navigate(0)
+          }
+      });
+      })
+      .catch((err) => {
+        console.log("nay: ", err)
+      })
+  }
+
   return (
     <>
       <Layout>
@@ -460,6 +495,7 @@ const Profil = () => {
                       title={data.title}
                       price={data.price}
                       image={data.image}
+                      onclick={() => onDeleteProduct(data.id)}
                     />
                   );
                 })}

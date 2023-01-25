@@ -148,8 +148,7 @@ export const CardProfil: FC<CardProps> = ({
   price,
   label,
   image,
-  onclick1,
-  onclick2,
+  onclick,
   onSubmit,
 }) => {
   return (
@@ -170,7 +169,7 @@ export const CardProfil: FC<CardProps> = ({
             <Button
               label={label}
               buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-              onClick={onclick1}
+              onClick={onclick}
             />
           </div>
           <div className="flex justify-end items-end">
