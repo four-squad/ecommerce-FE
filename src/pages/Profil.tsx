@@ -7,7 +7,7 @@ import axios from "axios";
 import { CardProfil } from "components/Card";
 import Layout from "components/Layout";
 
-import { ProductType } from 'utils/type'
+import { ProductType } from "utils/type";
 
 const Profil = () => {
   const [name, setName] = useState<string>("");
@@ -15,7 +15,7 @@ const Profil = () => {
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [cookie, setCookie, removeCookie] = useCookies();
-  const [myProduct, setMyProduct] = useState<ProductType[]>([])
+  const [myProduct, setMyProduct] = useState<ProductType[]>([]);
   const navigate = useNavigate();
 
   //edit profile
@@ -27,11 +27,11 @@ const Profil = () => {
   const [newPreviewImage, setNewPreviewImage] = useState<any>();
 
   //add product
-  const [addTitle, setAddTitle] = useState<string>("")
-  const [addPrice, setAddPrice] = useState<string>("")
-  const [addDesc, setAddDesc] = useState<string>("")
-  const [addImg, setAddImg] = useState<any>()
-  const [previewAddImg, setPreviewAddImg] = useState<any>()
+  const [addTitle, setAddTitle] = useState<string>("");
+  const [addPrice, setAddPrice] = useState<string>("");
+  const [addDesc, setAddDesc] = useState<string>("");
+  const [addImg, setAddImg] = useState<any>();
+  const [previewAddImg, setPreviewAddImg] = useState<any>();
 
   const handleEditImage = (file: any) => {
     setEditAvatar(file);
@@ -65,8 +65,8 @@ const Profil = () => {
         setName(name);
         setAddress(address);
         setAvatar(avatar);
-        setMyProduct(products)
-        console.log("data profil", products);
+        setMyProduct(products);
+        console.log("data product", products);
       })
       .catch((error) => {
         alert(error);
@@ -155,26 +155,35 @@ const Profil = () => {
   }
 
   function addPost(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault()
+    e.preventDefault();
     const formData = new FormData();
     formData.append("title", addTitle);
     formData.append("price", addPrice);
     formData.append("description", addDesc);
     formData.append("image", addImg);
 
-    axios.post(`https://remotecareer.tech/products`, formData,
-      {
+    axios
+      .post(`https://remotecareer.tech/products`, formData, {
         headers: {
           Authorization: `Bearer ${cookie.token}`,
         },
       })
       .then((res) => {
-        console.log("yey: ", res)
-        // setAddImg({})
+        console.log("file terupload: ", res);
+        Swal.fire({
+          title: "Success",
+          text: "Berhasil mengupload product",
+          showCancelButton: false,
+          confirmButtonText: "Ok",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            window.location.reload();
+          }
+        });
       })
       .catch((err) => {
-        console.log("nay: ", err)
-      })
+        console.log("gagal: ", err);
+      });
   }
 
   return (
@@ -399,7 +408,7 @@ const Profil = () => {
 
                       <div className="flex flex-col justify-center items-center mt-10">
                         <label
-                          htmlFor="edit-photo"
+                          htmlFor="editPhoto"
                           style={{ cursor: "pointer" }}
                           className={"p-2 bg-slate-300 mb-4 font-bold"}
                         >
@@ -408,25 +417,26 @@ const Profil = () => {
                         <input
                           type="file"
                           accept="image/*"
-                          id="edit-photo"
+                          id="editPhoto"
                           style={{ display: "none" }}
                           onChange={(e) => {
-                            if (!e.currentTarget.files) return;
-                            handleAddImage(e.currentTarget.files[0]);
+                            if (!e.target.files) return;
+                            handleAddImage(e.target.files[0]);
                           }}
                         />
                         <img
                           src={previewAddImg}
                           alt=""
                           width={200}
-                          height={100} />
+                          height={100}
+                        />
                       </div>
                       <div className="modal-action">
                         <button
                           type="submit"
                           className="btn bg-[#967E76] hover:bg-[#756152]"
                         >
-                          Update
+                          Upload
                         </button>
                       </div>
                     </div>
@@ -442,19 +452,17 @@ const Profil = () => {
             <span className="pt-10 px-20 font-bold text-xl">Your Product</span>
             <div className="w-full px-20">
               <div className="">
-                {
-                  myProduct.map((data) => {
-                    return (
-                      <CardProfil
-                        key={data.id}
-                        label="Remove"
-                        title={data.title}
-                        price={data.price}
-                        image={data.image}
-                      />
-                    )
-                  })
-                }
+                {myProduct.map((data) => {
+                  return (
+                    <CardProfil
+                      key={data.id}
+                      label="Remove"
+                      title={data.title}
+                      price={data.price}
+                      image={data.image}
+                    />
+                  );
+                })}
               </div>
             </div>
           </div>
