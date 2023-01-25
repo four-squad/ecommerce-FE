@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -11,12 +12,14 @@ const Profil = () => {
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [cookie, setCookie] = useCookies();
+  const [cookie, setCookie, removeCookie] = useCookies();
+  const navigate = useNavigate();
 
   //edit
   const [editName, setEditName] = useState<string>("");
   const [editEmail, setEditEmail] = useState<string>("");
   const [editAddress, setEditAddress] = useState<string>("");
+  const [editPassword, setEditPassword] = useState<string>("");
   const [editAvatar, setEditAvatar] = useState<any>();
   const [newPreviewImage, setNewPreviewImage] = useState<any>();
 
@@ -61,7 +64,7 @@ const Profil = () => {
 
     formData.append("address", editAddress);
     formData.append("email", editEmail);
-
+    formData.append("password", editPassword);
     formData.append("avatar", editAvatar);
 
     const config = {
@@ -85,6 +88,50 @@ const Profil = () => {
       })
       .catch((error) => {
         alert(error);
+      });
+  }
+  //hapus akun
+  function hapusAkun() {
+    axios
+      .delete(`https://remotecareer.tech/users`, {
+        headers: {
+          Authorization: `Bearer ${cookie.token}`,
+        },
+      })
+
+      .then((ress) => {
+        removeCookie("token");
+        removeCookie("name");
+        removeCookie("avatar");
+        Swal.fire({
+          title: "Are you sure want to delete account?",
+
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#3085d6",
+          confirmButtonText: "Yes",
+          cancelButtonColor: "#d33",
+          cancelButtonText: "No",
+        }).then((result) => {
+          if (result.isConfirmed) {
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              text: "Delete successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            removeCookie("token");
+            navigate("/");
+          }
+        });
+      })
+      .catch((err) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Delete account failed",
+        });
       });
   }
 
@@ -169,6 +216,18 @@ const Profil = () => {
                                       }
                                     />
                                   </div>
+                                  <div className="flex flex-row gap-12 pb-3">
+                                    <p>Password</p>
+                                    <input
+                                      type="text"
+                                      placeholder="Type here"
+                                      className="input w-full max-w-xs bg-white text-black"
+                                      value={editPassword}
+                                      onChange={(e) =>
+                                        setEditPassword(e.target.value)
+                                      }
+                                    />
+                                  </div>
 
                                   <div className="flex flex-col justify-center items-center mt-10">
                                     <label
@@ -211,38 +270,13 @@ const Profil = () => {
                           </div>
                           {/* akhir modal edit profil */}
                           <div className="mx-auto my-5 flex justify-center">
-                            <label
-                              htmlFor="modal-delete"
+                            <button
                               className="btn shadow bg-[#967E76]  hover:bg-[#756152] focus:shadow-outline focus:outline-none text-white font-bold py-2 px-12 rounded-full "
+                              onClick={() => hapusAkun()}
                             >
                               Delete Profile
-                            </label>
+                            </button>
                           </div>
-                          {/* modal delete */}
-                          <input
-                            type="checkbox"
-                            id="modal-delete"
-                            className="modal-toggle"
-                          />
-                          <div className="modal modal-bottom sm:modal-middle">
-                            <div className="modal-box">
-                              <h3 className="font-bold text-lg">
-                                Apakah anda yakin untuk menghapus akun anda?
-                              </h3>
-                              <div className="modal-action">
-                                <button className="btn bg-[#967E76] hover:bg-[#756152]">
-                                  Hapus
-                                </button>
-                                <label
-                                  htmlFor="modal-delete"
-                                  className="btn bg-[#967E76] hover:bg-[#756152]"
-                                >
-                                  Cancel
-                                </label>
-                              </div>
-                            </div>
-                          </div>
-                          {/* akhir modal delete */}
                         </div>
                       </div>
                     </div>
