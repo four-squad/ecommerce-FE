@@ -8,7 +8,7 @@ import register from "assets/bg-register.jpg";
 
 const Register = () => {
   const [name, setName] = useState<string>("");
-  const [alamat, setAlamat] = useState<string>("");
+  const [address, setAddress] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const Register = () => {
     axios
       .post("https://remotecareer.tech/register", {
         name: name,
-        alamat: alamat,
+        address: address,
         email: email,
         password: password,
       })
@@ -95,7 +95,7 @@ const Register = () => {
               <div className="flex flex-col py-2">
                 <div className="">
                   <label className="block text-black font-semibold text-md md:text-left mb-1 md:mb-0 pr-4">
-                    Alamat
+                    Address
                   </label>
                 </div>
                 <div className="">
@@ -103,9 +103,9 @@ const Register = () => {
                     className="bg-white appearance-none border-2 border-[#D9D9D9] rounded-2xl w-full py-2 px-4 text-black leading-tight focus:outline-none focus:bg-white h-14"
                     id="inline-full-username"
                     type="text"
-                    placeholder="alamat"
+                    placeholder="address"
                     onChange={(e) => {
-                      setAlamat(e.target.value);
+                      setAddress(e.target.value);
                     }}
                   />
                 </div>
