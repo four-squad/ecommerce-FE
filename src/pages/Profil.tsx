@@ -15,7 +15,7 @@ const Profil = () => {
   const [cookie, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
 
-  //edit
+  //edit profile
   const [editName, setEditName] = useState<string>("");
   const [editEmail, setEditEmail] = useState<string>("");
   const [editAddress, setEditAddress] = useState<string>("");
@@ -23,11 +23,27 @@ const Profil = () => {
   const [editAvatar, setEditAvatar] = useState<any>();
   const [newPreviewImage, setNewPreviewImage] = useState<any>();
 
+  //add product
+  const [addTitle, setAddTitle] = useState<string>("")
+  const [addPrice, setAddPrice] = useState<string>("")
+  const [addDesc, setAddDesc] = useState<string>("")
+  const [addImg, setAddImg] = useState<any>()
+  const [previewAddImg, setPreviewAddImg] = useState<any>()
+
   const handleEditImage = (file: any) => {
     setEditAvatar(file);
     const reader = new FileReader();
     reader.onload = () => {
       setNewPreviewImage(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleAddImage = (file: any) => {
+    setAddImg(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreviewAddImg(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -61,7 +77,6 @@ const Profil = () => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("name", editName);
-
     formData.append("address", editAddress);
     formData.append("email", editEmail);
     formData.append("password", editPassword);
@@ -135,6 +150,29 @@ const Profil = () => {
       });
   }
 
+  function addPost(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("title", addTitle);
+    formData.append("price", addPrice);
+    formData.append("description", addDesc);
+    formData.append("image", addImg);
+
+    axios.post(`https://remotecareer.tech/products`, formData,
+      {
+        headers: {
+          Authorization: `Bearer ${cookie.token}`,
+        },
+      })
+      .then((res) => {
+        console.log("yey: ", res)
+        // setAddImg({})
+      })
+      .catch((err) => {
+        console.log("nay: ", err)
+      })
+  }
+
   return (
     <>
       <Layout>
@@ -155,7 +193,7 @@ const Profil = () => {
                                   ? avatar
                                   : "https://cdn-icons-png.flaticon.com/512/3135/3135715.png"
                               }
-                              className="rounded-full"
+                              className="rounded-full w-[150px] h-[150px]"
                             />
                           </div>
 
@@ -315,7 +353,7 @@ const Profil = () => {
                   </label>
                 </div>
                 {/* modal add product */}
-                <form>
+                <form onSubmit={addPost}>
                   <input
                     type="checkbox"
                     id="my-modal-product"
@@ -330,14 +368,18 @@ const Profil = () => {
                           type="text"
                           placeholder="Type here"
                           className="input w-full max-w-xs bg-white text-black"
+                          value={addTitle}
+                          onChange={(e) => setAddTitle(e.target.value)}
                         />
                       </div>
                       <div className="flex flex-row gap-28 pb-3">
                         <p>Price</p>
                         <input
-                          type="number"
+                          type="text"
                           placeholder="Type here"
                           className="input w-full max-w-xs bg-white text-black"
+                          value={addPrice}
+                          onChange={(e) => setAddPrice(e.target.value)}
                         />
                       </div>
                       <div className="flex flex-row gap-16 pb-3">
@@ -346,6 +388,8 @@ const Profil = () => {
                           type="text"
                           placeholder="Type here"
                           className="input w-full max-w-xs bg-white text-black"
+                          value={addDesc}
+                          onChange={(e) => setAddDesc(e.target.value)}
                         />
                       </div>
 
@@ -362,8 +406,16 @@ const Profil = () => {
                           accept="image/*"
                           id="edit-photo"
                           style={{ display: "none" }}
+                          onChange={(e) => {
+                            if (!e.currentTarget.files) return;
+                            handleAddImage(e.currentTarget.files[0]);
+                          }}
                         />
-                        <img src="" alt="" width={200} />
+                        <img
+                          src={previewAddImg}
+                          alt=""
+                          width={200}
+                          height={100} />
                       </div>
                       <div className="modal-action">
                         <button
