@@ -33,6 +33,14 @@ const Profil = () => {
   const [addImg, setAddImg] = useState<any>();
   const [previewAddImg, setPreviewAddImg] = useState<any>();
 
+  //edit product
+  const [editTitle, setEditTitle] = useState<string>("");
+  const [editPrice, setEditPrice] = useState<string>("");
+  const [editDesc, setEditDesc] = useState<string>("");
+  const [editImg, setEditImg] = useState<any>();
+  const [previeweditImg, setPreviewEditImg] = useState<any>();
+  const [idProduct, setIdProduct] = useState<number>()
+
   const handleEditImage = (file: any) => {
     setEditAvatar(file);
     const reader = new FileReader();
@@ -47,6 +55,15 @@ const Profil = () => {
     const reader = new FileReader();
     reader.onload = () => {
       setPreviewAddImg(reader.result);
+    };
+    reader.readAsDataURL(file);
+  };
+
+  const handleEditImgProduct = (file: any) => {
+    setEditImg(file);
+    const reader = new FileReader();
+    reader.onload = () => {
+      setPreviewEditImg(reader.result);
     };
     reader.readAsDataURL(file);
   };
@@ -186,6 +203,27 @@ const Profil = () => {
       });
   }
 
+  function editPost(e: React.FormEvent<HTMLFormElement>, id: number) {
+    e.preventDefault()
+    const formData = new FormData();
+    formData.append("title", editTitle);
+    formData.append("price", editPrice);
+    formData.append("description", editDesc);
+    formData.append("image", editImg);
+
+    axios.put(`https://remotecareer.tech/products/${id}`, formData, {
+      headers: {
+        Authorization: `Bearer ${cookie.token}`,
+      },
+    })
+      .then((ress) => {
+        console.log("yey: ", ress)
+      })
+      .catch((err) => {
+        console.log("nay", err)
+      })
+  }
+
   function onDeleteProduct(id: number) {
     axios.delete(`https://remotecareer.tech/products/${id}`, {
       headers: {
@@ -203,18 +241,18 @@ const Profil = () => {
           confirmButtonText: "Yes",
           cancelButtonColor: "#d33",
           cancelButtonText: "No",
-      }).then((result) => {
+        }).then((result) => {
           if (result.isConfirmed) {
-              Swal.fire({
-                  position: "center",
-                  icon: "success",
-                  text: "Delete successfully",
-                  showConfirmButton: false,
-                  timer: 1500,
-              });
-              navigate(0)
+            Swal.fire({
+              position: "center",
+              icon: "success",
+              text: "Delete successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            navigate(0)
           }
-      });
+        });
       })
       .catch((err) => {
         console.log("nay: ", err)
@@ -228,7 +266,7 @@ const Profil = () => {
           <div className="box-border w-full max-h-fit py-10 bg-[#E5E5E5] rounded-lg">
             <div className="grid grid-cols-2 ">
               <div className="pt-5">
-                <span className="font-bold text-2xl px-20 ">Profile</span>
+                <span className="font-bold text-2xl px-20 text-black">Profile</span>
                 <div className="flex flex-col px-20 pt-5">
                   <div className="flex w-full ">
                     <div className="flex justify-center">
@@ -263,10 +301,10 @@ const Profil = () => {
                               />
                               <div className="modal modal-bottom sm:modal-middle ">
                                 <div className="modal-box bg-[#E5E5E5]">
-                                  <h3 className="font-bold text-lg">
+                                  <h3 className="font-bold text-lg text-black">
                                     Edit Account
                                   </h3>
-                                  <div className="flex flex-row gap-20 pb-3">
+                                  <div className="flex flex-row gap-20 pb-3 text-black">
                                     <p>Name</p>
                                     <input
                                       type="text"
@@ -278,7 +316,7 @@ const Profil = () => {
                                       }
                                     />
                                   </div>
-                                  <div className="flex flex-row gap-20 pb-3">
+                                  <div className="flex flex-row gap-20 pb-3 text-black">
                                     <p>Email</p>
                                     <input
                                       type="text"
@@ -290,7 +328,7 @@ const Profil = () => {
                                       }
                                     />
                                   </div>
-                                  <div className="flex flex-row gap-16 pb-3">
+                                  <div className="flex flex-row gap-16 pb-3 text-black">
                                     <p>Alamat</p>
                                     <input
                                       type="text"
@@ -302,7 +340,7 @@ const Profil = () => {
                                       }
                                     />
                                   </div>
-                                  <div className="flex flex-row gap-12 pb-3">
+                                  <div className="flex flex-row gap-12 pb-3 text-black">
                                     <p>Password</p>
                                     <input
                                       type="text"
@@ -315,12 +353,12 @@ const Profil = () => {
                                     />
                                   </div>
 
-                                  <div className="flex flex-col justify-center items-center mt-10">
+                                  <div className="flex flex-col justify-center items-center mt-10 text-black">
                                     <label
                                       htmlFor="edit-photo"
                                       style={{ cursor: "pointer" }}
                                       className={
-                                        "p-2 bg-slate-300 mb-4 font-bold"
+                                        "p-2 bg-slate-300 mb-4 font-bold rounded-lg"
                                       }
                                     >
                                       Upload Photo
@@ -345,7 +383,7 @@ const Profil = () => {
                                   <div className="modal-action">
                                     <button
                                       type="submit"
-                                      className="btn bg-[#967E76] hover:bg-[#756152]"
+                                      className="btn bg-[#967E76] hover:bg-[#756152] text-white"
                                     >
                                       Update
                                     </button>
@@ -409,8 +447,8 @@ const Profil = () => {
                   />
                   <div className="modal modal-bottom sm:modal-middle ">
                     <div className="modal-box bg-[#E5E5E5]">
-                      <h3 className="font-bold text-lg">Add Product</h3>
-                      <div className="flex flex-row gap-28 pb-3">
+                      <h3 className="font-bold text-lg text-black">Add Product</h3>
+                      <div className="flex flex-row gap-28 pb-3 text-black">
                         <p>Title</p>
                         <input
                           type="text"
@@ -420,7 +458,7 @@ const Profil = () => {
                           onChange={(e) => setAddTitle(e.target.value)}
                         />
                       </div>
-                      <div className="flex flex-row gap-28 pb-3">
+                      <div className="flex flex-row gap-28 pb-3 text-black" >
                         <p>Price</p>
                         <input
                           type="text"
@@ -430,7 +468,7 @@ const Profil = () => {
                           onChange={(e) => setAddPrice(e.target.value)}
                         />
                       </div>
-                      <div className="flex flex-row gap-16 pb-3">
+                      <div className="flex flex-row gap-16 pb-3 text-black">
                         <p>Description</p>
                         <input
                           type="text"
@@ -441,11 +479,11 @@ const Profil = () => {
                         />
                       </div>
 
-                      <div className="flex flex-col justify-center items-center mt-10">
+                      <div className="flex flex-col justify-center items-center mt-10 text-black">
                         <label
                           htmlFor="editPhoto"
                           style={{ cursor: "pointer" }}
-                          className={"p-2 bg-slate-300 mb-4 font-bold"}
+                          className={"p-2 bg-slate-300 mb-4 font-bold rounded-lg"}
                         >
                           Upload Product Image
                         </label>
@@ -469,7 +507,7 @@ const Profil = () => {
                       <div className="modal-action">
                         <button
                           type="submit"
-                          className="btn bg-[#967E76] hover:bg-[#756152]"
+                          className="btn bg-[#967E76] hover:bg-[#756152] text-white"
                         >
                           Upload
                         </button>
@@ -482,27 +520,110 @@ const Profil = () => {
             </div>
           </div>
         </div>
-        <div className="px-20 pt-20 ">
-          <div className="box-border w-full max-h-fitpy-10 bg-[#E5E5E5] rounded-lg pt-10">
-            <span className="pt-10 px-20 font-bold text-xl">Your Product</span>
-            <div className="w-full px-20">
-              <div className="">
-                {myProduct.map((data) => {
-                  return (
-                    <CardProfil
-                      key={data.id}
-                      label="Remove"
-                      title={data.title}
-                      price={data.price}
-                      image={data.image}
-                      onclick={() => onDeleteProduct(data.id)}
-                    />
-                  );
-                })}
+        {
+          myProduct.length !== 0 ?
+            (
+              <div className="px-20 pt-20 ">
+                <div className="box-border w-full max-h-fitpy-10 bg-[#E5E5E5] rounded-lg pt-10">
+                  <span className="pt-10 px-20 font-bold text-xl text-black">Your Product</span>
+                  <div className="w-full px-20">
+                    <div className="">
+                      {
+                        myProduct.map((data) => {
+                          return (
+                            <>
+                              <CardProfil
+                                key={data.id}
+                                label="Remove"
+                                title={data.title}
+                                price={data.price}
+                                image={data.image}
+                                onclick={() => onDeleteProduct(data.id)}
+                                onclick1={() => setIdProduct(data.id)}
+                              />
+                              {/* modal edit product */}
+                              <form onSubmit={(e) => editPost(e, idProduct? idProduct : data.id)}>
+                                <input type="checkbox" id="edit-modal" className="modal-toggle" />
+                                <div className="modal modal-bottom sm:modal-middle">
+                                  <div className="modal-box bg-[#E5E5E5]">
+                                    <h3 className="font-bold text-lg text-black mb-5">Update Product</h3>
+                                    <div className="flex flex-row gap-20 pb-3 text-black">
+                                      <p className="w-1/4">Title</p>
+                                      <input
+                                        type="text"
+                                        placeholder="Type here"
+                                        className="input w-full max-w-xs bg-white text-black"
+                                        value={editTitle}
+                                        onChange={(e) => setEditTitle(e.target.value)}
+                                      />
+                                    </div>
+                                    <div className="flex flex-row gap-20 pb-3 text-black">
+                                      <p className="w-1/4">Price</p>
+                                      <input
+                                        type="text"
+                                        placeholder="Type here"
+                                        className="input w-full max-w-xs bg-white text-black"
+                                        value={editPrice}
+                                        onChange={(e) => setEditPrice(e.target.value)}
+                                      />
+                                    </div>
+                                    <div className="flex flex-row gap-16 pb-3 text-black">
+                                      <p className="w-1/4">Desciption</p>
+                                      <input
+                                        type="text"
+                                        placeholder="Type here"
+                                        className="input w-full max-w-xs bg-white text-black"
+                                        value={editDesc}
+                                        onChange={(e) => setEditDesc(e.target.value)}
+                                      />
+                                    </div>
+
+                                    <div className="flex flex-col justify-center items-center mt-10 text-black">
+                                      <label
+                                        htmlFor="editPhotoProduct"
+                                        style={{ cursor: "pointer" }}
+                                        className={"p-2 bg-slate-300 mb-4 font-bold rounded-lg"}
+                                      >
+                                        Upload Image
+                                      </label>
+                                      <input
+                                        type="file"
+                                        accept="image/*"
+                                        id="editPhotoProduct"
+                                        style={{ display: "none" }}
+                                        onChange={(e) => {
+                                          if (!e.target.files) return;
+                                          handleEditImgProduct(e.target.files[0]);
+                                        }}
+                                      />
+                                      <img src={previeweditImg} width={200} height={100} />
+                                    </div>
+                                    <div className="modal-action">
+                                      <button className="btn bg-[#967E76] hover:bg-[#756152]" type="submit">
+                                        Update
+                                      </button>
+                                      <label
+                                        htmlFor="edit-modal"
+                                        className="btn bg-[#967E76] hover:bg-[#756152]"
+                                      >
+                                        Cancel
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
+                              {/* akhir modal edit product */}
+                            </>
+                          );
+                        })}
+                    </div>
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        </div>
+            ) : (
+              null
+            )
+        }
       </Layout>
     </>
   );

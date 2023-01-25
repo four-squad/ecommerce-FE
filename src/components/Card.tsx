@@ -149,6 +149,7 @@ export const CardProfil: FC<CardProps> = ({
   label,
   image,
   onclick,
+  onclick1,
   onSubmit,
 }) => {
   return (
@@ -175,67 +176,14 @@ export const CardProfil: FC<CardProps> = ({
           <div className="flex justify-end items-end">
             <label
               htmlFor="edit-modal"
+              onClick={onclick1}
               className="btn w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white mb-1"
             >
               Edit
             </label>
           </div>
         </div>
-      </div>
-      {/* modal edit product */}
-      <input type="checkbox" id="edit-modal" className="modal-toggle" />
-      <div className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box bg-[#E5E5E5]">
-          <h3 className="font-bold text-lg">Update Product</h3>
-          <div className="flex flex-row gap-20 pb-3">
-            <p>Name</p>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input w-full max-w-xs bg-white text-black"
-            />
-          </div>
-          <div className="flex flex-row gap-20 pb-3">
-            <p>Email</p>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input w-full max-w-xs bg-white text-black"
-            />
-          </div>
-          <div className="flex flex-row gap-16 pb-3">
-            <p>Alamat</p>
-            <input
-              type="text"
-              placeholder="Type here"
-              className="input w-full max-w-xs bg-white text-black"
-            />
-          </div>
-
-          <div className="flex flex-col justify-center items-center mt-10">
-            <label
-              htmlFor="edit-photo"
-              style={{ cursor: "pointer" }}
-              className={"p-2 bg-slate-300 mb-4 font-bold"}
-            >
-              Upload Image
-            </label>
-            <input type="file" accept="image/*" id="edit-photo" />
-            <img src="" alt="" width={200} />
-          </div>
-          <div className="modal-action">
-            <button className="btn bg-[#967E76] hover:bg-[#756152]">
-              Update
-            </button>
-            <label
-              htmlFor="edit-modal"
-              className="btn bg-[#967E76] hover:bg-[#756152]"
-            >
-              Cancel
-            </label>
-          </div>
-        </div>
-      </div>
+      </div>      
     </div>
   );
 };
