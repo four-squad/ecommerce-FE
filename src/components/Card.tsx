@@ -1,7 +1,6 @@
 import { ImPriceTags } from "react-icons/im";
-import React, { FC } from "react";
+import { FC } from "react";
 
-import { CustomInput } from "./CustomInput";
 import Button from "./Button";
 
 interface CardProps {
@@ -113,11 +112,6 @@ export const CardCart: FC<CardProps> = ({
           $ {price}
         </p>
         <div className="flex justify-end items-end">
-          <Button
-            label={label1}
-            buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-            onClick={onclick1}
-          />
         </div>
       </div>
       <div className="card-body pr-8">
