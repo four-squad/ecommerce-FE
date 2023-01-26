@@ -29,6 +29,12 @@ const ShoppingCart = () => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    if (!cookie.token) {
+      navigate("/");
+    }
+  }, [cookie.token]);
+
   function fetchData() {
     axios
       .get("https://remotecareer.tech/carts", {
@@ -38,7 +44,7 @@ const ShoppingCart = () => {
       })
       .then((res) => {
         const { data } = res.data;
-        console.log(data)
+        console.log(data);
         setCart(data);
         const totalQty = data.reduce((a: any, b: any) => {
           return a + b.qty;
@@ -66,10 +72,8 @@ const ShoppingCart = () => {
           Authorization: `Bearer ${cookie.token}`,
         },
       })
-      .then((res) => {
-      })
-      .catch((err) => {
-      })
+      .then((res) => {})
+      .catch((err) => {})
       .finally(() => fetchData());
   }
 
@@ -175,7 +179,9 @@ const ShoppingCart = () => {
           ) : (
             <>
               <div className="flex w-full justify-center items-center h-72">
-                <p className="text-4xl font-semibold animate-pulse ">Your cart is empty</p>
+                <p className="text-4xl font-semibold animate-pulse ">
+                  Your cart is empty
+                </p>
               </div>
             </>
           )}
