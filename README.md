@@ -2,7 +2,7 @@
 
 ## About Project
 
-<img src="https://github.com/four-squad/ecommerce-FE/blob/main/src/assets/Happy-Shop-square.png" alt="Logo" />
+<img align="center" src="https://github.com/four-squad/ecommerce-FE/blob/main/src/assets/Landing-Page-User.png" alt="Logo" />
 
 <p align="center">This project is an online shop system (e-commerce) for selling only the best things online</p>
 
@@ -69,5 +69,5 @@ The easiest way to deploy your React.js or Next.js app is to use the [Vercel Pla
 
 1. [Muhammad-Habibullah](https://github.com/hebobibun) (BE) 
 2. [Devangga-Wiku](https://github.com/DevWiku) (BE) 
-3. [Inri-Veronika-Togatorop](https://github.com/ALTA-Fe11-Inri) (FE)
+3. [Inri-Veronika-Togatorop](https://github.com/Inri692) (FE)
 4. [Aryo-Yudhanto](https://github.com/aryoyudhanto) (FE)
