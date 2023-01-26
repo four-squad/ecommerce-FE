@@ -15,7 +15,7 @@ const Profil = () => {
   const [address, setAddress] = useState<string>("");
   const [avatar, setAvatar] = useState<string>("");
   const [email, setEmail] = useState<string>("");
-  const [name, setName] = useState<string>(""); 
+  const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
   //edit profile
@@ -85,7 +85,11 @@ const Profil = () => {
         setMyProduct(products);
       })
       .catch((error) => {
-        alert(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something Wrong Error",
+        });
       });
   }
   useEffect(() => {
@@ -122,7 +126,11 @@ const Profil = () => {
         });
       })
       .catch((error) => {
-        alert(error);
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something Wrong Error",
+        });
       });
   }
   //hapus akun
@@ -271,6 +279,9 @@ const Profil = () => {
       .catch((err) => {
       });
   }
+  function onClickDetail(id: number) {
+    navigate(`/detail/${id}`)
+  }
 
   return (
     <>
@@ -396,6 +407,12 @@ const Profil = () => {
                                     />
                                   </div>
                                   <div className="modal-action">
+                                    <label
+                                      htmlFor="my-modal-6"
+                                      className="btn bg-[#967E76] hover:bg-[#756152] text-white"
+                                    >
+                                      Cancel
+                                    </label>
                                     <button
                                       type="submit"
                                       className="btn bg-[#967E76] hover:bg-[#756152] text-white"
@@ -524,6 +541,12 @@ const Profil = () => {
                         />
                       </div>
                       <div className="modal-action">
+                        <label
+                          htmlFor="my-modal-product"
+                          className="btn bg-[#967E76] hover:bg-[#756152] text-white"
+                        >
+                          Cancel
+                        </label>
                         <button
                           type="submit"
                           className="btn bg-[#967E76] hover:bg-[#756152] text-white"
@@ -558,6 +581,7 @@ const Profil = () => {
                           image={data.image}
                           onclick={() => onDeleteProduct(data.id)}
                           onclick1={() => setIdProduct(data.id)}
+                          onclick2={() => onClickDetail(data.id)}
                         />
                         {/* modal edit product */}
                         <form
@@ -633,18 +657,18 @@ const Profil = () => {
                                 />
                               </div>
                               <div className="modal-action">
+                                <label
+                                  htmlFor="edit-modal"
+                                  className="btn bg-[#967E76] hover:bg-[#756152] text-white"
+                                >
+                                  Cancel
+                                </label>
                                 <button
-                                  className="btn bg-[#967E76] hover:bg-[#756152]"
+                                  className="btn bg-[#967E76] hover:bg-[#756152] text-white"
                                   type="submit"
                                 >
                                   Update
                                 </button>
-                                <label
-                                  htmlFor="edit-modal"
-                                  className="btn bg-[#967E76] hover:bg-[#756152]"
-                                >
-                                  Cancel
-                                </label>
                               </div>
                             </div>
                           </div>

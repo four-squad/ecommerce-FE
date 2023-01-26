@@ -11,7 +11,7 @@ interface DetailType {
   image?: string
   price?: number
   description?: string
-  seller_name?: string
+  seller?: string
 }
 const Detail = () => {
   const [detail, setDetail] = useState<DetailType[]>([])
@@ -46,7 +46,7 @@ const Detail = () => {
                   title={data.title}
                   desc={data.description}
                   price={data.price}
-                  seller={data.seller_name}
+                  seller={data.seller}
                 />
               )
               )

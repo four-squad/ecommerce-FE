@@ -150,17 +150,17 @@ export const CardProfil: FC<CardProps> = ({
   image,
   onclick,
   onclick1,
-  onSubmit,
+  onclick2,
 }) => {
   return (
     <div className="card card-side bg-white shadow-xl my-5">
-      <figure className="w-1/3 h-64 m-5 rounded-md ">
+      <figure className="w-1/3 h-64 m-5 rounded-md " onClick={onclick2}>
         <img src={image} />
       </figure>
       <div className="card-body w-2/3 pr-0">
-        <h2 className="card-title text-black ">{title}</h2>
-        <p className="flex justify-start text-black text-sm md:text-lg">
-          <span className="flex justify-start px-2 py-1">
+        <h2 className="card-title text-black " onClick={onclick2}>{title}</h2>
+        <p className="flex justify-start text-black text-sm md:text-lg" onClick={onclick2}>
+          <span className="flex justify-start px-2 py-1" >
             <ImPriceTags color="black" />
           </span>
           $ {price}
