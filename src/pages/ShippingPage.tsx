@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import axios from "axios";
 
@@ -22,6 +23,13 @@ const ShippingPage = () => {
   const [totalQuantity, SetTotalQuantity] = useState<number>();
   const [totalPrice, setTotalPrice] = useState<number>();
   const [cookie, setCookie] = useCookies();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!cookie.token) {
+      navigate("/");
+    }
+  }, [cookie.token]);
 
   function fetchData() {
     axios

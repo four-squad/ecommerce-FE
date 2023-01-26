@@ -1,4 +1,5 @@
 import react, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
@@ -17,7 +18,14 @@ interface DetailType {
 const Detail = () => {
   const [detail, setDetail] = useState<DetailType[]>([]);
   const [cookie, setCookies] = useCookies();
+  const navigate = useNavigate();
   const { id } = useParams();
+
+  useEffect(() => {
+    if (!cookie.token) {
+      navigate("/");
+    }
+  }, [cookie.token]);
 
   function fetchDetail() {
     axios

@@ -18,6 +18,12 @@ const Profil = () => {
   const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (!cookie.token) {
+      navigate("/");
+    }
+  }, [cookie.token]);
+
   //edit profile
   const [newPreviewImage, setNewPreviewImage] = useState<any>();
   const [editPassword, setEditPassword] = useState<string>("");
