@@ -22,6 +22,7 @@ const ShippingPage = () => {
   const [cart, setCart] = useState<CartType[]>([]);
   const [totalQuantity, SetTotalQuantity] = useState<number>();
   const [totalPrice, setTotalPrice] = useState<number>();
+  const [address, setAddress] = useState<string>("");
   const [cookie, setCookie] = useCookies();
   const navigate = useNavigate();
 
@@ -59,6 +60,27 @@ const ShippingPage = () => {
     fetchData();
   }, []);
 
+  function transaction() {
+    axios
+      .post(
+        `https://remotecareer.tech/transactions`,
+        {
+          address: address,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${cookie.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        console.log("yey", res);
+      })
+      .catch((err) => {
+        console.log("nay", err);
+      });
+  }
+console.log(address)
   return (
     <Layout>
       <>
@@ -69,10 +91,15 @@ const ShippingPage = () => {
         <div className="px-20 ">
           <div className="box-border w-full max-h-fit py-10 bg-[#E5E5E5] rounded-lg px-10">
             <p className="text-black mb-3">Address</p>
-            <TextArea
+            <form onChange={transaction}>
+              <TextArea
               className="w-full overflow-y-auto h-36 bg-white text-black"
               style={{ resize: "none" }}
+              value={address}
+              onChange={(e) => setAddress(e.target.value)}
             />
+            </form>
+            
           </div>
         </div>
         <div className="px-20 text-2xl font-bold py-5 text-black">
@@ -117,8 +144,9 @@ const ShippingPage = () => {
         <div className="flex justify-end items-end py-10 px-20">
           <Button
             label="PURCHASE"
+            type="submit"
             buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full mb-1"
-            // onClick={}
+            // onClick={() => transaction()}
           />
         </div>
       </>
