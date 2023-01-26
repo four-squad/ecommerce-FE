@@ -1,5 +1,5 @@
 import { ImPriceTags } from "react-icons/im";
-import { FC } from "react";
+import React, { FC } from "react";
 
 import Button from "./Button";
 
@@ -14,7 +14,7 @@ interface CardProps {
   onclick1?: () => void;
   onclick2?: () => void;
   onClickDetail?: () => void;
-  onSubmit?: any;
+  onSubmit?: React.FormEvent<HTMLFormElement>;
   desc?: string;
   seller?: string;
   inputform?: any
@@ -99,7 +99,7 @@ export const CardCart: FC<CardProps> = ({
   inputform,
 }) => {
   return (
-    <div className="card card-side bg-white shadow-xl">
+    <div className="card card-side bg-white shadow-xl my-5">
       <figure className="w-1/3 h-64 m-5 rounded-md ">
         <img src={image} />
       </figure>
