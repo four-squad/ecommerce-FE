@@ -20,20 +20,33 @@ interface CardProps {
   seller?: string;
 }
 
-export const CardHome: FC<CardProps> = ({ title, price, label, image, onClickDetail, onclick }) => {
+export const CardHome: FC<CardProps> = ({
+  title,
+  price,
+  label,
+  image,
+  onClickDetail,
+  onclick,
+}) => {
   return (
     <div className="card bg-white shadow-xl rounded-md ">
-      <figure className="m-2 md:m-4 h-32 md:h-56 rounded-md" onClick={onClickDetail}>
-        <img
-          src={image}
-          className="w-full h-full"
-        />
+      <figure
+        className="m-2 md:m-4 h-32 md:h-56 rounded-md"
+        onClick={onClickDetail}
+      >
+        <img src={image} className="w-full h-full" />
       </figure>
       <div className="card-body p-2">
-        <h2 className="card-title text-sm md:text-xl font-semibold text-black px-1 md:px-2" onClick={onClickDetail}>
+        <h2
+          className="card-title text-sm md:text-xl font-semibold text-black px-1 md:px-2"
+          onClick={onClickDetail}
+        >
           {title}
         </h2>
-        <p className="flex justify-start text-black text-sm md:text-lg items-center" onClick={onClickDetail}>
+        <p
+          className="flex justify-start text-black text-sm md:text-lg items-center"
+          onClick={onClickDetail}
+        >
           <span className="flex justify-start items-center px-2">
             <ImPriceTags color="black" />
           </span>
@@ -66,9 +79,7 @@ export const CardDetail: FC<CardProps> = ({
         <img src={image} className="rounded-md" />
       </figure>
       <div className="card-body">
-        <h2 className="card-title text-black font-bold capitalize">
-          {title}
-        </h2>
+        <h2 className="card-title text-black font-bold capitalize">{title}</h2>
         <p className="text-black">{desc}</p>
         <div className="my-5">
           <p className="font-bold capitalize text-black">price: $ {price}</p>
@@ -158,9 +169,14 @@ export const CardProfil: FC<CardProps> = ({
         <img src={image} />
       </figure>
       <div className="card-body w-2/3 pr-0">
-        <h2 className="card-title text-black " onClick={onclick2}>{title}</h2>
-        <p className="flex justify-start text-black text-sm md:text-lg" onClick={onclick2}>
-          <span className="flex justify-start px-2 py-1" >
+        <h2 className="card-title text-black " onClick={onclick2}>
+          {title}
+        </h2>
+        <p
+          className="flex justify-start text-black text-sm md:text-lg"
+          onClick={onclick2}
+        >
+          <span className="flex justify-start px-2 py-1">
             <ImPriceTags color="black" />
           </span>
           $ {price}
@@ -183,7 +199,7 @@ export const CardProfil: FC<CardProps> = ({
             </label>
           </div>
         </div>
-      </div>      
+      </div>
     </div>
   );
 };
