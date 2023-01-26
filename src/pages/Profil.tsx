@@ -19,7 +19,7 @@ const Profil = () => {
   const navigate = useNavigate();
 
   //edit profile
-  const [newPreviewImage, setNewPreviewImage] = useState<any>()
+  const [newPreviewImage, setNewPreviewImage] = useState<any>();
   const [editPassword, setEditPassword] = useState<string>("");
   const [editAddress, setEditAddress] = useState<string>("");
   const [editEmail, setEditEmail] = useState<string>("");
@@ -204,8 +204,7 @@ const Profil = () => {
           }
         });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function editPost(e: React.FormEvent<HTMLFormElement>, id: number) {
@@ -242,8 +241,7 @@ const Profil = () => {
           }
         });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
 
   function onDeleteProduct(id: number) {
@@ -276,11 +274,10 @@ const Profil = () => {
           }
         });
       })
-      .catch((err) => {
-      });
+      .catch((err) => {});
   }
   function onClickDetail(id: number) {
-    navigate(`/detail/${id}`)
+    navigate(`/detail/${id}`);
   }
 
   return (
