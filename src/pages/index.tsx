@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import Swal from "sweetalert2";
 import axios from "axios";
 
 import { CardHome } from "components/Card";
@@ -33,11 +34,17 @@ const index = () => {
       },
     };
     axios
-      .post(`https://remotecareer.tech/carts/${id}`, config)
+      .post(`https://remotecareer.tech/carts/${id}`, {}, config)
       .then((res) => {
         console.log("add to cart", res);
-        const { data } = res.data;
-        setProduct(data);
+        const { message } = res.data;
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          text: message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
       })
       .catch((err) => {
         console.log("error", err);
