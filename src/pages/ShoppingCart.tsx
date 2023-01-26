@@ -7,6 +7,7 @@ import { CustomInput } from "components/CustomInput";
 import { CardCart } from "components/Card";
 import Button from "components/Button";
 import Layout from "components/Layout";
+import { useNavigate } from "react-router-dom";
 
 interface CartType {
   id: number;
@@ -20,6 +21,13 @@ interface CartType {
 const ShoppingCart = () => {
   const [cart, setCart] = useState<CartType[]>([]);
   const [cookie, setCookie] = useCookies();
+  const [totalQuantity, SetTotalQuantity] = useState<number>()
+  const [totalPrice, setTotalPrice] = useState<number>()
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function fetchData() {
     axios
@@ -29,16 +37,53 @@ const ShoppingCart = () => {
         },
       })
       .then((res) => {
-        console.log("yey: ", res.data);
         const { data } = res.data;
         setCart(data);
+        const totalQty = data.reduce((a: any, b: any) => {
+          return a + b.qty;
+        }, 0);
+        const totalPrc = data.reduce((a: any, b: any) => {
+            return a + b.total_price;
+          }, 0);
+          SetTotalQuantity(totalQty);
+          setTotalPrice(totalPrc);
+        console.log("carts: ",data);
+        // coba gunakan method reduce untuk menjumlahkan total qty dan total price dari keseluruhan items, hasil penjumlahan bebas bisa disimpan di sebuah state jg boleh
       })
       .catch((err) => {
         console.log("ney: ", err);
       });
   }
 
-  function onDeleteCart(id: number) {
+  function cobaWindowOpen() {
+    window.open("https://www.w3schools.com");
+  }
+
+  function handleChangeQty(
+    e: React.ChangeEvent<HTMLInputElement>,
+    data: CartType
+  ) {
+    const body = {
+      qty: e.target.valueAsNumber,
+      total_price: data.price * e.target.valueAsNumber,
+    };
+    axios
+      .put(`https://remotecareer.tech/checkout/${data.id}`, body, {
+        headers: {
+          Authorization: `Bearer ${cookie.token}`,
+        },
+      })
+      .then((res) => {
+        const { message } = res.data;
+        // alert(message);
+      })
+      .catch((err) => {
+        console.log("ney: ", err);
+      })
+      .finally(() => fetchData());
+  }
+
+function onDeleteCart(id: number) {
     axios
       .delete(`https://remotecareer.tech/carts/${id}`, {
         headers: {
@@ -63,11 +108,6 @@ const ShoppingCart = () => {
       })
       .catch((err) => {});
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
-
   return (
     <Layout>
       <div className="px-20 pt-20 ">
@@ -81,8 +121,9 @@ const ShoppingCart = () => {
                 image={data.image}
                 price={data.price}
                 label1="Remove"
-                onclick1={() => onDeleteCart(data.id)}
+                onclick1={() => console.log("remove")}
                 inputform={
+                  <>
                   <form>
                     <div className="">
                       <CustomInput
@@ -91,33 +132,48 @@ const ShoppingCart = () => {
                         parentSet="flex"
                         labelSet="flex items-center text-black mr-5"
                         inputSet="w-24 border-[#e5e5e5] text-black"
+                        defaultValue={data.qty}
+                        // value={
+                        //     if(e.target.value > "0"){
+                                
+                        //     }
+                        // }
+                        onChange={(e) => {
+                          if (e.target.value > "0") {
+                            handleChangeQty(e, data);
+                          }
+                        }}
                       />
                       <p className="pb-24 text-black font-bold capitalize">
-                        total: $ {"price"}
+                        total: $ {data.total_price}
                       </p>
-                    </div>
-                    <Button
-                      label="Checkout"
-                      buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full"
-                      onClick={() => console.log("haha")}
-                    />
+                    </div>                    
                   </form>
+                  <Button
+                      label="Remove"
+                      buttonSet="w-48 mx-2 text-xs md:text-base normal-case bg-[#967E76]  hover:bg-[#756152] border-none text-white w-full"
+                      onClick={() => onDeleteCart(data.id)}
+                    />
+                  </>
                 }
               />
             );
           })}
-
+          <button className="btn" onClick={() => cobaWindowOpen()}>
+            hiyaa
+          </button>
           <div className="flex justify-end w-full">
             <div className="bg-white w-1/3 h-full my-10 rounded-lg shadow-xl">
               <div className="p-5">
-                <p className="text-black">Total Quantity: 2</p>
+                <p className="text-black">Total Quantity: {totalQuantity}</p>
                 <p className="text-black">Shipping: FREE</p>
-                <p className="text-black font-bold">Total Price: $ 100</p>
+                <p className="text-black font-bold">Total Price: $ {totalPrice}</p>
               </div>
               <div className="flex justify-end w-full">
                 <Button
                   label="Order"
                   buttonSet="w-1/4 m-5 bg-[#967E76] hover:bg-[#756152] text-white border-none"
+                  onClick={()=>navigate('/shipping')}
                 />
               </div>
             </div>
