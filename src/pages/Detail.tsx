@@ -16,11 +16,11 @@ const Detail = () => {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    if (!cookie.token) {
-      navigate("/");
-    }
-  }, [cookie.token]);  
+  // useEffect(() => {
+  //   if (!cookie.token) {
+  //     navigate("/");
+  //   }
+  // }, [cookie.token]);
 
   useEffect(() => {
     fetchDetail();
