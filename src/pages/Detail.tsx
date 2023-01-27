@@ -46,7 +46,6 @@ const Detail = () => {
     axios
       .post(`https://remotecareer.tech/carts/${id}`, {}, config)
       .then((res) => {
-        console.log("add to cart", res);
         const { message } = res.data;
         Swal.fire({
           position: "center",
@@ -56,9 +55,7 @@ const Detail = () => {
           timer: 1500,
         });
       })
-      .catch((err) => {
-        console.log("error", err);
-      });
+      .catch((err) => {});
   }
 
   useEffect(() => {

@@ -13,6 +13,7 @@ const PurchaseHistory = () => {
       navigate("/");
     }
   }, [cookie.token]);
+
   return (
     <Layout>
       <div className="px-20 pt-20 ">
