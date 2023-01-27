@@ -8,13 +8,8 @@ import axios from "axios";
 import { CardDetail } from "components/Card";
 import Layout from "components/Layout";
 
-interface DetailType {
-  title?: string;
-  image?: string;
-  price?: number;
-  description?: string;
-  seller?: string;
-}
+import { DetailType } from "utils/type";
+
 const Detail = () => {
   const [detail, setDetail] = useState<DetailType[]>([]);
   const [cookie, setCookies] = useCookies();
@@ -25,7 +20,11 @@ const Detail = () => {
     if (!cookie.token) {
       navigate("/");
     }
-  }, [cookie.token]);
+  }, [cookie.token]);  
+
+  useEffect(() => {
+    fetchDetail();
+  }, []);
 
   function fetchDetail() {
     axios
@@ -57,10 +56,6 @@ const Detail = () => {
       })
       .catch((err) => {});
   }
-
-  useEffect(() => {
-    fetchDetail();
-  }, []);
 
   return (
     <Layout>

@@ -30,7 +30,7 @@ const Register = () => {
           text: message,
           showConfirmButton: false,
           timer: 1500,
-        })
+        });
         navigate("/login");
       })
       .catch((error) => {
