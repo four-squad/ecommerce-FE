@@ -1,5 +1,6 @@
-import { useCookies } from "react-cookie";
+import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 import axios from "axios";
 
@@ -7,7 +8,6 @@ import { CustomInput } from "components/CustomInput";
 import { CardCart } from "components/Card";
 import Button from "components/Button";
 import Layout from "components/Layout";
-import { useNavigate } from "react-router-dom";
 
 interface CartType {
   id: number;
@@ -44,7 +44,7 @@ const ShoppingCart = () => {
       })
       .then((res) => {
         const { data } = res.data;
-        console.log(data);
+
         setCart(data);
         const totalQty = data.reduce((a: any, b: any) => {
           return a + b.qty;

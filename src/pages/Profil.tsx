@@ -260,7 +260,7 @@ const Profil = () => {
       .then((res) => {
         Swal.fire({
           title: "Are you sure want to delete product?",
-          // text: "You won't be able to revert this!",
+
           icon: "warning",
           showCancelButton: true,
           confirmButtonColor: "#3085d6",

@@ -41,7 +41,7 @@ const ShippingPage = () => {
       })
       .then((res) => {
         const { data } = res.data;
-        console.log("data2", data);
+
         setCart(data);
         const totalQty = data.reduce((a: any, b: any) => {
           return a + b.qty;
@@ -73,14 +73,10 @@ const ShippingPage = () => {
           },
         }
       )
-      .then((res) => {
-        console.log("yey", res);
-      })
-      .catch((err) => {
-        console.log("nay", err);
-      });
+      .then((res) => {})
+      .catch((err) => {});
   }
-console.log(address)
+  console.log(address);
   return (
     <Layout>
       <>
@@ -93,13 +89,12 @@ console.log(address)
             <p className="text-black mb-3">Address</p>
             <form onChange={transaction}>
               <TextArea
-              className="w-full overflow-y-auto h-36 bg-white text-black"
-              style={{ resize: "none" }}
-              value={address}
-              onChange={(e) => setAddress(e.target.value)}
-            />
+                className="w-full overflow-y-auto h-36 bg-white text-black"
+                style={{ resize: "none" }}
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+              />
             </form>
-            
           </div>
         </div>
         <div className="px-20 text-2xl font-bold py-5 text-black">
