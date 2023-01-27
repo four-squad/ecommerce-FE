@@ -13,6 +13,10 @@ const index = () => {
   const [product, setProduct] = useState<ProductType[]>([]);
   const [cookie, setCookie, removeCookie] = useCookies();
   const navigate = useNavigate();
+  
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   function fetchData() {
     axios
@@ -23,9 +27,6 @@ const index = () => {
       })
       .catch((err) => {});
   }
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   function addToCart(id: number) {
     const config = {

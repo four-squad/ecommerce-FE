@@ -1,5 +1,5 @@
-import { ImPriceTags } from "react-icons/im";
 import { useNavigate } from "react-router-dom";
+import { ImPriceTags } from "react-icons/im";
 import { useCookies } from "react-cookie";
 import { useEffect } from "react";
 
@@ -8,6 +8,7 @@ import Layout from "components/Layout";
 const PurchaseHistory = () => {
   const [cookie, setCookies] = useCookies();
   const navigate = useNavigate();
+  
   useEffect(() => {
     if (!cookie.token) {
       navigate("/");

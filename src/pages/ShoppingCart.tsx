@@ -1,5 +1,5 @@
-import { useNavigate } from "react-router-dom";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import Swal from "sweetalert2";
 import axios from "axios";
@@ -9,14 +9,7 @@ import { CardCart } from "components/Card";
 import Button from "components/Button";
 import Layout from "components/Layout";
 
-interface CartType {
-  id: number;
-  image: string;
-  price: number;
-  qty: number;
-  title: string;
-  total_price: number;
-}
+import { CartType } from "utils/type";
 
 const ShoppingCart = () => {
   const [cart, setCart] = useState<CartType[]>([]);

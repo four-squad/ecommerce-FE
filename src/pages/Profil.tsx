@@ -18,12 +18,6 @@ const Profil = () => {
   const [name, setName] = useState<string>("");
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (!cookie.token) {
-      navigate("/");
-    }
-  }, [cookie.token]);
-
   //edit profile
   const [newPreviewImage, setNewPreviewImage] = useState<any>();
   const [editPassword, setEditPassword] = useState<string>("");
@@ -46,6 +40,16 @@ const Profil = () => {
   const [idProduct, setIdProduct] = useState<number>();
   const [editDesc, setEditDesc] = useState<string>("");
   const [editImg, setEditImg] = useState<any>();
+
+  useEffect(() => {
+    getProfil();
+  }, []);
+  
+  useEffect(() => {
+    if (!cookie.token) {
+      navigate("/");
+    }
+  }, [cookie.token]);
 
   const handleEditImage = (file: any) => {
     setEditAvatar(file);
@@ -98,9 +102,6 @@ const Profil = () => {
         });
       });
   }
-  useEffect(() => {
-    getProfil();
-  }, []);
 
   //update profil
   function editProfil(e: React.FormEvent<HTMLFormElement>) {

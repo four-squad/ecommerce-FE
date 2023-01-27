@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { ImPriceTags } from "react-icons/im";
 import { useCookies } from "react-cookie";
 import axios from "axios";
-
-import { ImPriceTags } from "react-icons/im";
 
 import { TextArea } from "components/CustomInput";
 import Button from "components/Button";
 import Layout from "components/Layout";
 
-interface CartType {
-  id: number;
-  image: string;
-  price: number;
-  qty: number;
-  title: string;
-  total_price: number;
-}
+import { CartType } from "utils/type";
 
 const ShippingPage = () => {
-  const [cart, setCart] = useState<CartType[]>([]);
   const [totalQuantity, SetTotalQuantity] = useState<number>();
   const [totalPrice, setTotalPrice] = useState<number>();
   const [address, setAddress] = useState<string>("");
+  const [cart, setCart] = useState<CartType[]>([]);
   const [cookie, setCookie] = useCookies();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    fetchData();
+  }, []);
 
   useEffect(() => {
     if (!cookie.token) {
@@ -55,10 +51,6 @@ const ShippingPage = () => {
 
       .catch((err) => {});
   }
-
-  useEffect(() => {
-    fetchData();
-  }, []);
 
   function transaction() {
     axios
